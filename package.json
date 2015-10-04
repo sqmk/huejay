@@ -26,7 +26,6 @@
     "test": "mocha"
   },
   "dependencies": {
-    "lodash":  "3.10.0",
     "request": "2.61.0"
   },
   "devDependencies": {
