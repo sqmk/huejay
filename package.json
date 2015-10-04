@@ -1,32 +1,39 @@
 {
-	"name": "huejay",
-	"version": "0.0.0",
-	"description": "Philips Hue client for Node.js",
-	"homepage": "https://github.com/sqmk/huejay",
-	"bugs": {
-		"url": "https://github.com/sqmk/huejay/issues"
-	},
-	"keywords": [
-		"hue",
-		"philips",
-		"huejay",
-		"client",
-		"api"
-	],
-	"license": "MIT",
-	"repository": "sqmk/huejay",
-	"maintainers": [
-		"Michael Squires <sqmk@php.net>"
-	],
-	"engines": {
-		"node": ">=4.0.0"
-	},
-	"main": "lib/Huejay.js",
-	"scripts": {
-		"test": "mocha"
-	},
-	"dependencies": {
-	},
-	"devDependencies": {
-	}
+  "name": "huejay",
+  "version": "0.1.0",
+  "description": "Philips Hue client for Node.js",
+  "homepage": "https://github.com/sqmk/huejay",
+  "bugs": {
+    "url": "https://github.com/sqmk/huejay/issues"
+  },
+  "keywords": [
+    "hue",
+    "philips",
+    "huejay",
+    "client",
+    "api"
+  ],
+  "license": "MIT",
+  "repository": "sqmk/huejay",
+  "maintainers": [
+    "Michael Squires <sqmk@php.net>"
+  ],
+  "engines": {
+    "node": ">=4.0.0"
+  },
+  "main": "lib/Huejay.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "dependencies": {
+    "lodash":  "3.10.0",
+    "request": "2.61.0"
+  },
+  "devDependencies": {
+    "mocha":            "2.3.2",
+    "chai":             "3.2.0",
+    "chai-as-promised": "5.1.0",
+    "sinon":            "1.17.0",
+    "mockery":          "1.4.0"
+  }
 }
