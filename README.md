@@ -45,9 +45,9 @@ huejay.discover()
 ```
 
 Huejay offers several strategies for bridge discovery:
-* *nupnp*: Default option, uses Meethue's public API to discover local bridges
-* *upnp*: Uses SSDP to discover local bridges
-* *all*: Uses all available strategies for discovery
+* **nupnp**: Default option, uses Meethue's public API to discover local bridges
+* **upnp**: Uses SSDP to discover local bridges
+* **all**: Uses all available strategies for discovery
 
 To use a specific discovery strategy:
 
