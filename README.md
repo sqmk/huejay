@@ -36,7 +36,7 @@ them.
 huejay.discover()
   .then((bridges) {
     for (var bridge of bridges) {
-      console.log(`- Id: ${bridge.id}, IP: ${bridge.ip}`);
+      console.log(`Id: ${bridge.id}, IP: ${bridge.ip}`);
     }
   })
   .catch((error) => {
