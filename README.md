@@ -1,4 +1,4 @@
-<p>
+<p align="center">
   <img src="https://cdn.rawgit.com/sqmk/huejay/bdf7f23ce011b9fefe34f365e7fa421df0e3170e/media/logo.png" alt="Huejay" />
 </p>
 
