@@ -1,3 +1,7 @@
+<p>
+  <img src="https://cdn.rawgit.com/sqmk/huejay/bdf7f23ce011b9fefe34f365e7fa421df0e3170e/media/logo.png" alt="Huejay" />
+</p>
+
 # Huejay - Philips Hue client for Node.js
 
 [![NPM Version](https://badge.fury.io/js/huejay.svg)](https://www.npmjs.com/package/huejay)
