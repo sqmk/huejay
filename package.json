@@ -1,11 +1,7 @@
 {
   "name": "huejay",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Philips Hue client for Node.js",
-  "homepage": "https://github.com/sqmk/huejay",
-  "bugs": {
-    "url": "https://github.com/sqmk/huejay/issues"
-  },
   "keywords": [
     "hue",
     "philips",
@@ -13,15 +9,15 @@
     "client",
     "api"
   ],
-  "license": "MIT",
-  "repository": "sqmk/huejay",
   "maintainers": [
     "Michael Squires <sqmk@php.net>"
   ],
-  "engines": {
-    "node": ">=4.0.0"
-  },
+  "license": "MIT",
+  "repository": "sqmk/huejay",
   "main": "lib/Huejay.js",
+  "files": [
+    "lib"
+  ],
   "scripts": {
     "test": "mocha"
   },
