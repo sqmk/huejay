@@ -33,7 +33,7 @@ Most methods return a **Promise** as a result.
 
 ### Bridge Discovery
 
-Before interacting with your Hue system, you may want to know the availibility
+Before interacting with your Hue system, you may want to know the availability
 and IP addresses of your bridges. You can use Huejay's **discover** method to find
 them.
 
