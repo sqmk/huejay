@@ -11,6 +11,7 @@ Huejay is a client for the Philips Hue home lighting system.
 
 Use Huejay to interact with Philips Hue in the following ways:
 * Bridge discovery
+* Create users
 
 ## Installation
 
@@ -38,12 +39,12 @@ them.
 
 ```js
 huejay.discover()
-  .then((bridges) {
+  .then(bridges => {
     for (var bridge of bridges) {
       console.log(`Id: ${bridge.id}, IP: ${bridge.ip}`);
     }
   })
-  .catch((error) => {
+  .catch(error => {
     console.log(`An error occurred: ${error.message}`);
   });
 ```
@@ -57,7 +58,7 @@ To use a specific discovery strategy:
 
 ```js
 huejay.discover({strategy: 'upnp'})
-  .then((bridges)) {
+  .then(bridges => {
     console.log(bridges);
   });
 ```

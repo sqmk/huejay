@@ -7,7 +7,7 @@ let huejay = require('../lib/Huejay');
 console.log('Discovering bridges...');
 
 huejay.discover({strategy: 'all'})
-  .then((bridges) => {
+  .then(bridges => {
     if (!bridges.length) {
       console.log('- No bridges found');
       return;
@@ -17,6 +17,6 @@ huejay.discover({strategy: 'all'})
       console.log(`- Id: ${bridge.id}, IP: ${bridge.ip}`);
     }
   })
-  .catch((error) => {
+  .catch(error => {
     console.log(error.message);
   });
