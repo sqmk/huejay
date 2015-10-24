@@ -5,18 +5,57 @@
 let huejay = require('../lib/Huejay');
 let credentials = require('./.credentials.json');
 
-let client = new huejay.Client(credentials.host);
+let client = new huejay.Client(credentials.host, credentials.username);
 
 console.log(`Retrieving bridge (${credentials.host})...`);
 
 client.getBridge()
   .then(bridge => {
-    console.log(`Name: ${bridge.name}`);
-    console.log(`Bridge Id: ${bridge.bridgeId}`);
-    console.log(`Model Id: ${bridge.modelId}`);
-    console.log(`Software Version: ${bridge.softwareVersion}`);
-    console.log(`API Version: ${bridge.apiVersion}`);
-    console.log(`MAC Address: ${bridge.macAddress}`);
+    console.log(`Bridge:`);
+    console.log(`  Id: ${bridge.id}`);
+    console.log(`  Name: ${bridge.name}`);
+    console.log(`  Model Id: ${bridge.modelId}`);
+    console.log(`  Factory new: ${bridge.isFactoryNew()}`);
+    console.log(`  Replaces bridge: ${bridge.replacesBridgeId}`);
+    console.log();
+
+    console.log(`Versions:`);
+    console.log(`  Software Version: ${bridge.softwareVersion}`);
+    console.log(`  API Version: ${bridge.apiVersion}`);
+    console.log();
+
+    console.log(`Zigbee:`);
+    console.log(`  Channel: ${bridge.zigbeeChannel}`);
+    console.log();
+
+    console.log(`Network details:`);
+    console.log(`  MAC Address: ${bridge.macAddress}`);
+    console.log(`  IP Address: ${bridge.ipAddress}`);
+    console.log(`  DHCP enabled: ${bridge.isDhcpEnabled()}`);
+    console.log(`  Netmask: ${bridge.netmask}`);
+    console.log(`  Gateway: ${bridge.gateway}`);
+    console.log();
+
+    console.log(`Proxy:`);
+    console.log(`  Address: ${bridge.proxyAddress}`);
+    console.log(`  Port: ${bridge.proxyPort}`);
+    console.log();
+
+    console.log(`Time:`);
+    console.log(`  UTC: ${bridge.utcTime}`);
+    console.log(`  Time zone: ${bridge.timeZone}`);
+    console.log(`  Local time: ${bridge.localTime}`);
+    console.log();
+
+    console.log(`Portal:`);
+    console.log(`  Services enabled: ${bridge.isPortalServicesEnabled()}`);
+    console.log(`  Connected: ${bridge.isPortalConnected()}`);
+    console.log();
+
+    console.log(`Functions:`);
+    console.log(`  Link button enabled: ${bridge.isLinkButtonEnabled()}`);
+    console.log(`  Touch Link enabled: ${bridge.isTouchLinkEnabled()}`);
+    console.log();
   })
   .catch(error => {
     console.log(error.stack);
