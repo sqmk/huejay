@@ -5,7 +5,7 @@
 let huejay = require('../lib/Huejay');
 let credentials = require('./.credentials.json');
 
-let client = new huejay.Client(credentials.host, credentials.username);
+let client = new huejay.Client(credentials);
 
 console.log('Retrieving supported time zones...');
 

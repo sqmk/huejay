@@ -5,7 +5,7 @@
 let huejay = require('../lib/Huejay');
 let credentials = require('./.credentials.json');
 
-let client = new huejay.Client(credentials.host);
+let client = new huejay.Client(credentials);
 
 console.log('Pinging bridge...');
 
