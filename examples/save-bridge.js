@@ -18,9 +18,9 @@ client.getBridge()
     bridge.touchLinkEnabled  = true;
     bridge.linkButtonEnabled = true;
 
-    console.log(`Updating bridge...`);
+    console.log(`Saving bridge configuration...`);
 
-    return client.updateBridge(bridge);
+    return client.saveBridge(bridge);
   })
   .then(() => {
     console.log('Success');

@@ -29,7 +29,7 @@ client.getSoftwareUpdate()
 
     console.log(`  Release URL: ${softwareUpdate.releaseUrl}`);
     console.log(`  Release notes: ${softwareUpdate.releaseNotes}`);
-    console.log(`  Notify after installation: ${softwareUpdate.notificationEnabled}`);
+    console.log(`  Notify after installation: ${softwareUpdate.installNotificationEnabled}`);
   })
   .catch(error => {
     console.log(error.stack);
