@@ -15,7 +15,7 @@ client.getBridge()
     console.log(`  Id: ${bridge.id}`);
     console.log(`  Name: ${bridge.name}`);
     console.log(`  Model Id: ${bridge.modelId}`);
-    console.log(`  Factory new: ${bridge.isFactoryNew()}`);
+    console.log(`  Factory new: ${bridge.factoryNew}`);
     console.log(`  Replaces bridge: ${bridge.replacesBridgeId}`);
     console.log();
 
@@ -31,7 +31,7 @@ client.getBridge()
     console.log(`Network details:`);
     console.log(`  MAC Address: ${bridge.macAddress}`);
     console.log(`  IP Address: ${bridge.ipAddress}`);
-    console.log(`  DHCP enabled: ${bridge.isDhcpEnabled()}`);
+    console.log(`  DHCP enabled: ${bridge.dhcpEnabled}`);
     console.log(`  Netmask: ${bridge.netmask}`);
     console.log(`  Gateway: ${bridge.gateway}`);
     console.log();
@@ -48,13 +48,13 @@ client.getBridge()
     console.log();
 
     console.log(`Portal:`);
-    console.log(`  Services enabled: ${bridge.isPortalServicesEnabled()}`);
-    console.log(`  Connected: ${bridge.isPortalConnected()}`);
+    console.log(`  Services enabled: ${bridge.portalServicesEnabled}`);
+    console.log(`  Connected: ${bridge.portalConnected}`);
     console.log();
 
     console.log(`Functions:`);
-    console.log(`  Link button enabled: ${bridge.isLinkButtonEnabled()}`);
-    console.log(`  Touch Link enabled: ${bridge.isTouchLinkEnabled()}`);
+    console.log(`  Link button enabled: ${bridge.linkButtonEnabled}`);
+    console.log(`  Touch Link enabled: ${bridge.touchLinkEnabled}`);
     console.log();
   })
   .catch(error => {

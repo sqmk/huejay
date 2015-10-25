@@ -12,9 +12,9 @@ console.log(`Retrieving portal (${credentials.host})...`);
 client.getPortal()
   .then(portal => {
     console.log(`Portal:`);
-    console.log(`  Is signed on: ${portal.isSignedOn()}`);
-    console.log(`  Incoming: ${portal.isIncoming()}`);
-    console.log(`  Outgoing: ${portal.isOutgoing()}`);
+    console.log(`  Is signed on: ${portal.signedOn}`);
+    console.log(`  Incoming: ${portal.incoming}`);
+    console.log(`  Outgoing: ${portal.outgoing}`);
     console.log(`  Communication: ${portal.communication}`);
     console.log();
   })
