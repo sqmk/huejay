@@ -11,8 +11,9 @@ console.log(`Retrieving bridge (${credentials.host})...`);
 
 client.getBridge()
   .then(bridge => {
-    bridge.name     = `Huejay test ${(new Date()).getSeconds()}`;
-    bridge.timeZone = 'America/Detroit';
+    bridge.name          = `Huejay test ${(new Date()).getSeconds()}`;
+    bridge.timeZone      = 'America/Detroit';
+    bridge.zigbeeChannel = 20;
     bridge.enableDhcp(true);
     bridge.enableTouchLink(true);
     bridge.enableLinkButton(true);
