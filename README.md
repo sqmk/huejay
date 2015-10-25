@@ -43,7 +43,7 @@ them.
 ```js
 huejay.discover()
   .then(bridges => {
-    for (var bridge of bridges) {
+    for (let bridge of bridges) {
       console.log(`Id: ${bridge.id}, IP: ${bridge.ip}`);
     }
   })
