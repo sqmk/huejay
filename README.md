@@ -16,6 +16,7 @@ Use Huejay to interact with Philips Hue in the following ways:
 * Manage software updates
 * Manage users
 * Manage lights
+# Manage groups
 
 ## Installation
 
