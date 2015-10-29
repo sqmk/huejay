@@ -15,6 +15,7 @@ client.getGroups()
     for (let group of groups) {
       console.log(`Group [${group.id}]: ${group.name}`);
       console.log(`  Type: ${group.type}`);
+      console.log('  Lights: ' + group.lights.join(', '));
       console.log('  State:');
       console.log(`    On:         ${group.on}`);
       console.log(`    Brightness: ${group.brightness}`);
