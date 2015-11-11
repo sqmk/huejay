@@ -22,7 +22,8 @@
     "test": "mocha"
   },
   "dependencies": {
-    "request": "2.61.0"
+    "request":    "2.61.0",
+    "sprintf-js": "1.0.3"
   },
   "devDependencies": {
     "mocha":            "2.3.2",
