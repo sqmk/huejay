@@ -22,6 +22,7 @@
     "test": "mocha"
   },
   "dependencies": {
+    "moment":     "2.10.6",
     "request":    "2.61.0",
     "sprintf-js": "1.0.3"
   },
