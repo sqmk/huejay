@@ -24,9 +24,9 @@ describe('TimePattern/Timer', () => {
 
   describe('toString', () => {
     it('should be expected format with seconds', () => {
-      let schedule = new Timer(65321);
+      let schedule = new Timer(2382);
 
-      expect(String(schedule)).to.equal('P18:08:41');
+      expect(String(schedule)).to.equal('P00:39:42');
     });
 
     it('should be expected format with seconds and repeat', () => {
