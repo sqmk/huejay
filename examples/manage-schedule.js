@@ -26,7 +26,20 @@ client.getLight(8)
   .then(schedule => {
     console.log(`Schedule created: ${schedule.id}`);
 
-    console.log('Deleting schedule...');
+    console.log('Saving schedule');
+    schedule.name = 'New name';
+
+    return client.saveSchedule(schedule);
+  })
+  .then(schedule => {
+    console.log('Saved schedule');
+
+    console.log('Retrieving schedule');
+
+    return client.getSchedule(schedule.id);
+  })
+  .then(schedule => {
+    console.log(`Schedule [${schedule.id}]: ${schedule.name}`);
 
     return client.deleteSchedule(schedule);
   })
