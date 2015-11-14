@@ -26,13 +26,13 @@ describe('TimePattern/Timer', () => {
     it('should be expected format with seconds', () => {
       let schedule = new Timer(2382);
 
-      expect(String(schedule)).to.equal('P00:39:42');
+      expect(String(schedule)).to.equal('PT00:39:42');
     });
 
     it('should be expected format with seconds and repeat', () => {
       let schedule = new Timer(12350, 24);
 
-      expect(String(schedule)).to.equal('R24/P03:25:50');
+      expect(String(schedule)).to.equal('R24/PT03:25:50');
     });
   });
 });
