@@ -9,11 +9,11 @@ let client = new huejay.Client(credentials);
 
 console.log('Creating group...');
 
-let group = new huejay.Group;
+let group = new client.groups.Group;
 group.name = 'Group name here';
 group.lights = [8, 9];
 
-client.createGroup(group)
+client.groups.create(group)
   .then(group => {
     console.log(`New group [${group.id}]:`);
     console.log(`  Name: ${group.name}`);
@@ -24,7 +24,7 @@ client.createGroup(group)
   .then(groupId => {
     console.log(`Retrieving group ${groupId}`);
 
-    return client.getGroup(groupId);
+    return client.groups.getById(groupId);
   })
   .then(group => {
     console.log('Updating group and changing state');
@@ -35,12 +35,12 @@ client.createGroup(group)
     group.brightness     = 254;
     group.transitionTime = 0;
 
-    return client.saveGroup(group);
+    return client.groups.save(group);
   })
   .then(group => {
     console.log('Deleting group');
 
-    return client.deleteGroup(group);
+    return client.groups.delete(group);
   })
   .catch(error => {
     console.log(error.stack);

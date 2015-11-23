@@ -10,7 +10,7 @@ let client = new huejay.Client(credentials);
 console.log('Retrieving groups...');
 console.log();
 
-client.getGroups()
+client.groups.getAll()
   .then(groups => {
     for (let group of groups) {
       console.log(`Group [${group.id}]: ${group.name}`);
