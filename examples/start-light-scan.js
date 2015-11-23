@@ -9,7 +9,7 @@ let client = new huejay.Client(credentials);
 
 console.log('Starting light scan...');
 
-client.startLightScan()
+client.lights.scan()
   .then(() => {
     console.log('Success');
   })

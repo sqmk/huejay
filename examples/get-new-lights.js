@@ -10,7 +10,7 @@ let client = new huejay.Client(credentials);
 console.log('Retrieving new lights...');
 console.log();
 
-client.getNewLights()
+client.lights.getNew()
   .then(lights => {
     for (let light of lights) {
       console.log(light);

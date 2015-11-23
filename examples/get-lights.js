@@ -10,7 +10,7 @@ let client = new huejay.Client(credentials);
 console.log('Retrieving lights...');
 console.log();
 
-client.getLights()
+client.lights.getAll()
   .then(lights => {
     for (let light of lights) {
       console.log(`Light [${light.id}]: ${light.name}`);

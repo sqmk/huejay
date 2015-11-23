@@ -10,7 +10,7 @@ let client = new huejay.Client(credentials);
 console.log('Retrieving light...');
 console.log();
 
-client.getLight(8)
+client.lights.getById(8)
   .then(light => {
     console.log(`Light [${light.id}]: ${light.name}`);
     console.log(`  Type:             ${light.type}`);

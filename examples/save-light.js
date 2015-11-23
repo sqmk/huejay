@@ -9,7 +9,7 @@ let client = new huejay.Client(credentials);
 
 console.log(`Retrieving light from (${credentials.host})...`);
 
-client.getLights()
+client.lights.getAll()
   .then(lights => {
     let light = lights[4];
 
@@ -18,7 +18,7 @@ client.getLights()
 
     console.log(`Saving light...`);
 
-    return client.saveLight(light);
+    return client.lights.save(light);
   })
   .then(() => {
     console.log('Success');
