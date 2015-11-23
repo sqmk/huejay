@@ -10,7 +10,7 @@ let client = new huejay.Client(credentials);
 console.log('Retrieving schedules...');
 console.log();
 
-client.getSchedules()
+client.schedules.getAll()
   .then(schedules => {
     for (let schedule of schedules) {
       console.log(`Schedule [${schedule.id}]: ${schedule.name}`);
