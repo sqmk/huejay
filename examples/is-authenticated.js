@@ -9,7 +9,7 @@ let client = new huejay.Client(credentials);
 
 console.log('Testing authentication...');
 
-client.isAuthenticated()
+client.bridge.isAuthenticated()
   .then(() => {
     console.log('Success');
   })
