@@ -9,11 +9,11 @@ let client = new huejay.Client(credentials);
 
 console.log(`Checking for software update (${credentials.host})...`);
 
-client.checkForSoftwareUpdates()
+client.softwareUpdate.check()
   .then(() => {
     console.log('Retrieving software update details...');
 
-    return client.getSoftwareUpdate();
+    return client.softwareUpdate.get();
   })
   .then(softwareUpdate => {
     console.log(`  Checking: ${softwareUpdate.checkingEnabled}`);

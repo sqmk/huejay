@@ -9,11 +9,11 @@ let client = new huejay.Client(credentials);
 
 console.log(`Installing software updates (${credentials.host})...`);
 
-client.installSoftwareUpdates()
+client.softwareUpdate.install()
   .then(() => {
     console.log('Retrieving software update details...');
 
-    return client.getSoftwareUpdate();
+    return client.softwareUpdate.get();
   })
   .then(softwareUpdate => {
     console.log(`  State: ${softwareUpdate.state}`);

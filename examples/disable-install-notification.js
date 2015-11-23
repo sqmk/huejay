@@ -9,11 +9,11 @@ let client = new huejay.Client(credentials);
 
 console.log(`Disabling install notification (${credentials.host})...`);
 
-client.disableInstallNotification()
+client.softwareUpdate.disableInstallNotification()
   .then(() => {
     console.log('Retrieving software update details...');
 
-    return client.getSoftwareUpdate();
+    return client.softwareUpdate.get();
   })
   .then(softwareUpdate => {
     console.log(`  Install notification: ${softwareUpdate.installNotificationEnabled}`);
