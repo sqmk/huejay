@@ -9,7 +9,7 @@ let client = new huejay.Client(credentials);
 
 console.log(`Retrieving portal (${credentials.host})...`);
 
-client.getPortal()
+client.portal.get()
   .then(portal => {
     console.log(`Portal:`);
     console.log(`  Is signed on: ${portal.signedOn}`);
