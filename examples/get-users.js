@@ -10,7 +10,7 @@ let client = new huejay.Client(credentials);
 console.log('Retrieving users...');
 console.log();
 
-client.getUsers()
+client.users.getAll()
   .then(users => {
     for (let user of users) {
       console.log(` Username: ${user.username}`);
