@@ -11,7 +11,7 @@ console.log('Attempting to create user.');
 console.log('Make sure link button on bridge is pressed.');
 console.log('...');
 
-client.createUser()
+client.users.create()
   .then(username => {
     console.log(`New username created: ${username}`);
   })

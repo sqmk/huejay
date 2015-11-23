@@ -9,7 +9,7 @@ let client = new huejay.Client(credentials);
 
 console.log('Pinging bridge...');
 
-client.ping()
+client.bridge.ping()
   .then(() => {
     console.log('Success');
   })

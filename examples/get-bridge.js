@@ -9,7 +9,7 @@ let client = new huejay.Client(credentials);
 
 console.log(`Retrieving bridge (${credentials.host})...`);
 
-client.getBridge()
+client.bridge.get()
   .then(bridge => {
     console.log(`Bridge:`);
     console.log(`  Id: ${bridge.id}`);

@@ -9,7 +9,7 @@ let client = new huejay.Client(credentials);
 
 console.log('Deleting user...');
 
-client.deleteUser('usernamehere')
+client.users.delete('usernamehere')
   .then(() => {
     console.log('Success');
   })

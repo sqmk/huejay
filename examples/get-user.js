@@ -8,9 +8,8 @@ let credentials = require('./.credentials.json');
 let client = new huejay.Client(credentials);
 
 console.log('Retrieving user...');
-console.log();
 
-client.getUser()
+client.users.get()
   .then(user => {
     if (user === undefined) {
       return console.log('  Not found.');

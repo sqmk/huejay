@@ -9,7 +9,7 @@ let client = new huejay.Client(credentials);
 
 console.log(`Retrieving bridge (${credentials.host})...`);
 
-client.getBridge()
+client.bridge.get()
   .then(bridge => {
     bridge.name              = `Huejay test ${(new Date()).getSeconds()}`;
     bridge.timeZone          = 'America/Detroit';
@@ -20,7 +20,7 @@ client.getBridge()
 
     console.log(`Saving bridge configuration...`);
 
-    return client.saveBridge(bridge);
+    return client.bridge.save(bridge);
   })
   .then(() => {
     console.log('Success');
