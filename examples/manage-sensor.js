@@ -9,7 +9,7 @@ let client = new huejay.Client(credentials);
 
 console.log('Creating sensor...');
 
-let sensor = new huejay.Sensor;
+let sensor = new client.sensors.Sensor;
 sensor.name             = 'Sensor name here';
 sensor.modelId          = 'Sensormodel';
 sensor.softwareVersion  = '1.2.3';
@@ -20,7 +20,7 @@ sensor.manufacturer     = 'Huejay';
 sensor.config.on  = false;
 sensor.state.flag = true;
 
-client.createSensor(sensor)
+client.sensors.create(sensor)
   .then(sensor => {
     console.log(`New sensor [${sensor.id}]: ${sensor.name}`);
     console.log(`  Type: ${sensor.type}`);
@@ -43,7 +43,7 @@ client.createSensor(sensor)
   .then(sensorId => {
     console.log(`Retrieving sensor ${sensorId}`);
 
-    return client.getSensor(sensorId);
+    return client.sensors.getById(sensorId);
   })
   .then(sensor => {
     console.log('Updating sensor and changing state');
@@ -53,12 +53,12 @@ client.createSensor(sensor)
     sensor.config.on  = false;
     sensor.state.flag = true;
 
-    return client.saveSensor(sensor);
+    return client.sensors.save(sensor);
   })
   .then(sensor => {
     console.log('Deleting sensor');
 
-    return client.deleteSensor(sensor);
+    return client.sensors.delete(sensor);
   })
   .catch(error => {
     console.log(error.stack);

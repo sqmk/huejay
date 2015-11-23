@@ -10,7 +10,7 @@ let client = new huejay.Client(credentials);
 console.log('Retrieving sensors...');
 console.log();
 
-client.getSensors()
+client.sensors.getAll()
   .then(sensors => {
     for (let sensor of sensors) {
       console.log(`Sensor [${sensor.id}]: ${sensor.name}`);
