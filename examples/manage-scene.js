@@ -9,14 +9,14 @@ let client = new huejay.Client(credentials);
 
 console.log('Creating scene and retrieving light...');
 
-let scene = new huejay.Scene('huejay-test');
+let scene = new client.scenes.Scene('huejay-test');
 scene.name = 'Huejay test';
 scene.lights = [8, 9, 10];
 scene.transitionTime = 2;
 
 Promise.all([
-  client.createScene(scene),
-  client.getLight(8)
+  client.scenes.create(scene),
+  client.lights.getById(8)
 ])
   .then(results => {
     console.log('Scene created...');
@@ -27,7 +27,7 @@ Promise.all([
 
     console.log('Saving scene light state...');
 
-    return client.saveSceneLightState(scene, light, ['brightness']);
+    return client.scenes.saveLightState(scene, light, ['brightness']);
   })
   .then(() => {
     console.log('Light state saved on scene...');

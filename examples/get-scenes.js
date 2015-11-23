@@ -10,7 +10,7 @@ let client = new huejay.Client(credentials);
 console.log('Retrieving scenes...');
 console.log();
 
-client.getScenes()
+client.scenes.getAll()
   .then(scenes => {
     for (let scene of scenes) {
       console.log(`Scene [${scene.id}]: ${scene.name}`);
