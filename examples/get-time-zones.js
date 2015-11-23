@@ -9,7 +9,7 @@ let client = new huejay.Client(credentials);
 
 console.log('Retrieving supported time zones...');
 
-client.getTimeZones()
+client.timeZones.getAll()
   .then(timeZones => {
     console.log('Time Zones:');
     for (let tz of timeZones) {
