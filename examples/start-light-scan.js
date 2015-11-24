@@ -2,10 +2,7 @@
 
 'use strict';
 
-let huejay = require('../lib/Huejay');
-let credentials = require('./.credentials.json');
-
-let client = new huejay.Client(credentials);
+let client = require('./init-client');
 
 console.log('Starting light scan...');
 
