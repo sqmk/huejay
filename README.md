@@ -20,7 +20,7 @@ Use Huejay to interact with Philips Hue in the following ways:
 * Manage schedules
 * Manage scenes
 * Manage sensors
-* Retrieving and deleting rules
+* Retrieve and delete rules
 
 ## Installation
 
