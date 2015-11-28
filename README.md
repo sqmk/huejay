@@ -79,7 +79,7 @@ in this repository.
 
 ## Logo
 
-Huejay's initial logo was designed by scorpion6 on Fiverr. Font used is Lago Bold.
+Huejay's initial logo was designed by scorpion6 on Fiverr. Font used is Lato Bold.
 
 ## License
 
