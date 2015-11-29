@@ -2,9 +2,9 @@
 
 'use strict';
 
-let client = require('./init-client');
+let client = require('../init-client');
 
-console.log(`Retrieving portal (${credentials.host})...`);
+console.log(`Retrieving portal (${client.host})...`);
 
 client.portal.get()
   .then(portal => {
