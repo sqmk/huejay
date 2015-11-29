@@ -2,7 +2,7 @@
 
 'use strict';
 
-let client = require('./init-client');
+let client = require('../init-client');
 
 console.log('Retrieving supported time zones...');
 
