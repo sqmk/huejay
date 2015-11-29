@@ -2,7 +2,7 @@
 
 'use strict';
 
-let client = require('./init-client');
+let client = require('../init-client');
 
 console.log('Attempting to create user.');
 console.log('Make sure link button on bridge is pressed.');
