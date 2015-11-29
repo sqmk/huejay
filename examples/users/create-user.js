@@ -8,9 +8,14 @@ console.log('Attempting to create user.');
 console.log('Make sure link button on bridge is pressed.');
 console.log('...');
 
-client.users.create()
-  .then(username => {
-    console.log(`New username created: ${username}`);
+let user = new client.users.User;
+user.deviceType = 'customDevice';
+
+client.users.create(user)
+  .then(user => {
+    console.log(`New user created:`);
+    console.log(`  Username: ${user.username}`);
+    console.log(`  Device type: ${user.deviceType}`);
   })
   .catch(error => {
     if (error instanceof huejay.Error && error.type === 101) {
