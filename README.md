@@ -72,7 +72,7 @@ huejay.discover({strategy: 'upnp'})
 
 ### Errors
 
-Nearly all errors returned by Huejay will of type `huejay.Error`. Use this to
+Nearly all errors returned by Huejay are of type `huejay.Error`. Use this to
 check Huejay specific errors.
 
 ## Client Usage
@@ -95,7 +95,7 @@ If a *username* is not provided, nearly all commands will fail due to failure to
 authenticate with the bridge. Be sure to provide a valid *username* to use all
 client commands.
 
-### User management
+### Users
 
 Huejay provides several commands for managing users on Philips Hue bridges.
 
@@ -197,6 +197,33 @@ client.users.delete('usernamehere')
   })
   .catch(error => {
     console.log(error.stack);
+  });
+```
+
+### Bridge
+
+### Portal
+
+### Software Update
+
+### Time Zones
+
+The Philips Hue bridge supports configuring a local time zone. This is useful
+for scheduling functions. Numerous time zones are registered on the bridge for
+retrieval.
+
+#### client.timeZones.getAll - Get all time zones
+
+You can retrieve a list of supported time zones by calling
+`client.timeZones.getAll`. This will return an array of string values.
+
+```js
+client.timeZones.getAll()
+  .then(timeZones => {
+    console.log('Time Zones:');
+    for (let tz of timeZones) {
+      console.log(`  ${tz}`);
+    }
   });
 ```
 
