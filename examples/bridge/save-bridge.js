@@ -19,8 +19,8 @@ client.bridge.get()
 
     return client.bridge.save(bridge);
   })
-  .then(() => {
-    console.log('Success');
+  .then(bridge => {
+    console.log(`Bridge "${bridge.name}" saved...`);
   })
   .catch(error => {
     console.log(error.stack);
