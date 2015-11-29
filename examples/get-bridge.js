@@ -4,7 +4,7 @@
 
 let client = require('./init-client');
 
-console.log(`Retrieving bridge (${credentials.host})...`);
+console.log(`Retrieving bridge (${client.host})...`);
 
 client.bridge.get()
   .then(bridge => {
