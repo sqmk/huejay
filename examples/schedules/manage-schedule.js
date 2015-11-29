@@ -2,7 +2,7 @@
 
 'use strict';
 
-let client = require('./init-client');
+let client = require('../init-client');
 
 // Get light
 client.lights.getById(8)
