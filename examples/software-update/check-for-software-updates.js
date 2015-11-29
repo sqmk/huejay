@@ -2,18 +2,18 @@
 
 'use strict';
 
-let client = require('./init-client');
+let client = require('../init-client');
 
-console.log(`Installing software updates (${credentials.host})...`);
+console.log(`Checking for software update (${client.host})...`);
 
-client.softwareUpdate.install()
+client.softwareUpdate.check()
   .then(() => {
     console.log('Retrieving software update details...');
 
     return client.softwareUpdate.get();
   })
   .then(softwareUpdate => {
-    console.log(`  State: ${softwareUpdate.state}`);
+    console.log(`  Checking: ${softwareUpdate.checkingEnabled}`);
   })
   .catch(error => {
     console.log(error.stack);

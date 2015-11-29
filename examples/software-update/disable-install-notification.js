@@ -2,9 +2,9 @@
 
 'use strict';
 
-let client = require('./init-client');
+let client = require('../init-client');
 
-console.log(`Disabling install notification (${credentials.host})...`);
+console.log(`Disabling install notification (${client.host})...`);
 
 client.softwareUpdate.disableInstallNotification()
   .then(() => {

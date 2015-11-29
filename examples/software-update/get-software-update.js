@@ -2,9 +2,9 @@
 
 'use strict';
 
-let client = require('./init-client');
+let client = require('../init-client');
 
-console.log(`Retrieving software update details (${credentials.host})...`);
+console.log(`Retrieving software update details (${client.host})...`);
 
 client.softwareUpdate.get()
   .then(softwareUpdate => {
