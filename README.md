@@ -117,7 +117,7 @@ let user = new huejay.users.User;
 user.deviceType = 'my_device_type'; // Default is 'huejay'
 
 client.users.create(user)
-.then(user => {
+  .then(user => {
     console.log(`New user created - Username: ${user.username}`);
   })
   .catch(error => {
