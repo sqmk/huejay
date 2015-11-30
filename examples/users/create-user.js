@@ -2,6 +2,7 @@
 
 'use strict';
 
+let huejay = require('../../lib/Huejay');
 let client = require('../init-client');
 
 console.log('Attempting to create user.');
