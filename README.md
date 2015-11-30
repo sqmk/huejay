@@ -333,6 +333,78 @@ client.portal.get()
 
 ### Software Update
 
+Occasionally, Philips releases new updates for the bridge, lights, and devices.
+You can use Huejay to facilitate downloading and installation of updates.  
+
+#### client.softwareUpdate.get - Get software update details
+
+To get software update details, use the `client.softwareUpdate.get` method to
+retrieve a **SoftwareUpdate** object. This object provides details about any
+pending updates to the bridge or other resources.
+
+```js
+client.softwareUpdate.get()
+  .then(softwareUpdate => {
+    console.log(`State: ${softwareUpdate.state}`);
+    console.log(`Release URL: ${softwareUpdate.releaseUrl}`);
+    console.log(`Release notes: ${softwareUpdate.releaseNotes}`);
+  });
+```
+
+The following attributes are available on the **SoftwareUpdate** object:
+- `state` - Update state, see below for values
+- `checkingEnabled` - `true` if bridge is checking for updates, `false` if not
+- `bridge` - `true` if updates are available for the bridge, `false` if not
+- `lights` - An array of light ids with available updates
+- `sensors` - An array of sensor ids with available updates
+- `releaseUrl` - Release URL
+- `releaseNotes` - Release notes
+- `installNotificationEnabled` - Whether or not the install notification is enabled
+
+The following are possible `state` values:
+- `NO_UPDATE` - There are no updates available
+- `DOWNLOADING` - Updates are being downloaded
+- `READY_TO_INSTALL` - Updates are ready to be installed
+- `INSTALLING` - Updates are installing
+
+#### client.softwareUpdate.check - Make bridge to check for software updates
+
+You can request the bridge to check for software updates. Call the
+`client.softwareUpdate.check` method to have the bridge start checking for
+updates. A `huejay.Error` is thrown if the bridge is already checking.
+
+```js
+client.softwareUpdate.check()
+  .then(() => {
+    console.log('Bridge is checking for software updates');
+  });
+```
+
+#### client.softwareUpdate.install - Start installation of any updates
+
+If there are any pending software updates, you can use `client.softwareUpdate.install`
+to install them. A `huejay.Error` is thrown if there are no updates to install.
+
+```js
+client.softwareUpdate.install()
+  .then(() => {
+    console.log('Installation has begun');
+  });
+```
+
+#### client.softwareUpdate.disableInstallNotification - Disables install notification
+
+To disable the install notification (useful for mobile apps),
+`client.softwareUpdate.disableInstallNotifaction` will allow you to turn off the
+notification. This only works when there are pending updates to the bridge.
+
+```js
+client.softwareUpdate.disableInstallNotification()
+  .then(() => {
+    console.log('Install notification is now disabled');
+  });
+```
+
 ### Time Zones
 
 The Philips Hue bridge supports configuring a local time zone. This is useful
