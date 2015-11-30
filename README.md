@@ -10,11 +10,11 @@
 Huejay is a client for the Philips Hue home lighting system.
 
 Use Huejay to interact with Philips Hue in the following ways:
-* Bridge discovery
-* Manage bridge settings
-* Manage portal settings
-* Manage software updates
-* Manage users
+* [Bridge discovery](#bridge-discovery)
+* [Manage bridge settings](#bridge)
+* [Manage portal settings](#portal)
+* [Manage software updates](#software-updates)
+* [Manage users](#users)
 * Manage lights
 * Manage groups
 * Manage schedules
