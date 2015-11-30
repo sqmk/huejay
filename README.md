@@ -310,6 +310,27 @@ The following **Bridge** attributes are configurable:
 
 ### Portal
 
+The Philips Hue bridge allows connection to Philips' Meethue.com portal
+services. You can use Meethue.com to remotely configure numerous resources
+on your bridge, including lights, devices, and scenes.
+
+Huejay currently offers a way to retrieve Meethue's portal connectivity details.
+
+#### client.portal.get - Get portal details
+
+Use `client.portal.get` to retrieve connectivity details. This method will
+return a **Portal** object.
+
+```js
+client.portal.get()
+  .then(portal => {
+    console.log(`Is signed on: ${portal.signedOn}`);
+    console.log(`Incoming: ${portal.incoming}`);
+    console.log(`Outgoing: ${portal.outgoing}`);
+    console.log(`Communication: ${portal.communication}`);
+  });
+```
+
 ### Software Update
 
 ### Time Zones
