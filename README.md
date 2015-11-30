@@ -314,7 +314,7 @@ The Philips Hue bridge allows connection to Philips' Meethue.com portal
 services. You can use Meethue.com to remotely configure numerous resources
 on your bridge, including lights, devices, and scenes.
 
-Huejay currently offers a way to retrieve Meethue's portal connectivity details.
+Huejay provides a way to retrieve Meethue's portal connectivity details.
 
 #### client.portal.get - Get portal details
 
