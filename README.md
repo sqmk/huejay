@@ -220,9 +220,8 @@ You can retrieve a list of supported time zones by calling
 ```js
 client.timeZones.getAll()
   .then(timeZones => {
-    console.log('Time Zones:');
     for (let tz of timeZones) {
-      console.log(`  ${tz}`);
+      console.log(tz);
     }
   });
 ```
