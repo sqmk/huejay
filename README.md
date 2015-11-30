@@ -133,7 +133,8 @@ client.users.create(user)
 
 *Note: It is possible to use Huejay to toggle the link button if you are already
 authenticated with the bridge. This may save you from walking over to the bridge
-to physically press the link button.*
+to physically press the link button. See `client.bridge.save` and **Bridge**
+`linkButtonEnabled`.*
 
 #### client.users.get - Get authenticated user
 
@@ -201,6 +202,111 @@ client.users.delete('usernamehere')
 ```
 
 ### Bridge
+
+Huejay supports retrieving and configuring the Philips Hue bridge. It supports
+testing connection and authentication to the bridge as well.
+
+#### client.bridge.ping - Test connection to the bridge
+
+Use `client.bridge.ping` to test connection to your preferred bridge. Failed
+connection results in a thrown `huejay.Error`.
+
+```js
+client.bridge.ping()
+  .then(() => {
+    console.log('Successful connection');
+  })
+  catch(error => {
+    console.log('Could not connect');
+  });
+```
+
+#### client.bridge.isAuthenticated - Test authentication to the bridge
+
+To ensure your supplied client username can authenticate to the bridge, use
+`client.bridge.isAuthenticated`. Authentication or connection failure will
+result `huejay.Error` being thrown.
+
+```js
+client.bridge.isAuthenticated()
+  .then(() => {
+    console.log('Successful authentication');
+  })
+  catch(error => {
+    console.log('Could not authenticate');
+  });
+```
+
+#### client.bridge.get - Get bridge details and configuration
+
+Want to get bridge details? Use Huejay's `client.bridge.get`
+method. This will return a **Bridge** object, which can be used for reading
+and saving configuration.
+
+```js
+client.bridge.get()
+  .then(bridge => {
+    console.log(`Retrieved bridge ${bridge.name}`);
+    console.log(`  Id: ${bridge.id}`);
+    console.log(`  Model Id: ${bridge.modelId}`);
+  });
+```
+
+Attributes available on the **Bridge** object:
+- `id` - Unique
+- `name` - Name of the bridge
+- `modelId` - Model Id
+- `factoryNew` - Whether or not the bridge is factory new
+- `replacesBridgeId` - Replaces bridge id (for migrating from old bridges)
+- `softwareVersion` - Software version of the bridge
+- `apiVersion` - API version of the bridge
+- `zigbeeChannel` - ZigBee channel (for communicating with lights)
+- `macAddress` - MAC address
+- `ipAddress` - IP address
+- `dhcpEnabled` - Whether or not DHCP is enabled
+- `netmask` - Netmask
+- `gateway` - Gateway
+- `proxyAddress` - Proxy address
+- `proxyPort` - Proxy port
+- `utcTime` - UTC time of the bridge
+- `timeZone` - Time zone
+- `localTime` - Local time of the bridge
+- `portalServicesEnabled` - Whether or not portal services are enabled
+- `portalConnected` - Whether or not portal is connected
+- `linkButtonEnabled` - Whether or not link button is enabled
+- `touchLinkEnabled` - Whether or not touch link is enabled
+
+#### client.bridge.save - Save bridge configuration
+
+You can configure the bridge by changing values on the **Bridge** object and
+passing to the `client.bridge.save` method. This method will return the same
+**Bridge** for further manipulation.
+
+```js
+client.bridge.get()
+  .then(bridge => {
+    // Change bridge's name
+    bridge.name = 'New bridge name';
+
+    return client.bridge.save(bridge);
+  })
+  .then(bridge => {
+    console.log(`Bridge is now named ${bridge.name}`);
+  });
+```
+
+The following **Bridge** attributes are configurable:
+- `name` - Name of the bridge
+- `zigbeeChannel` - Preferred ZigBee channel
+- `ipAddress` - IP address
+- `dhcpEnabled` - `true` to enable, `false` to disable
+- `netmask` - Netmask
+- `gateway` - Gateway
+- `proxyPort` - Proxy port
+- `proxyAddress` - Proxy address
+- `timeZone` - Any value available in `client.timeZones.getAll`
+- `linkButtonEnabled` - `true` to toggle on temporarily
+- `touchLinkEnabled` - `true` to toggle on temporarily
 
 ### Portal
 
