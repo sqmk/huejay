@@ -367,7 +367,7 @@ The following are possible `state` values:
 - `READY_TO_INSTALL` - Updates are ready to be installed
 - `INSTALLING` - Updates are installing
 
-#### client.softwareUpdate.check - Make bridge to check for software updates
+#### client.softwareUpdate.check - Make bridge check for software updates
 
 You can request the bridge to check for software updates. Call the
 `client.softwareUpdate.check` method to have the bridge start checking for
@@ -380,7 +380,7 @@ client.softwareUpdate.check()
   });
 ```
 
-#### client.softwareUpdate.install - Start installation of any updates
+#### client.softwareUpdate.install - Start installation of pending updates
 
 If there are any pending software updates, you can use `client.softwareUpdate.install`
 to install them. A `huejay.Error` is thrown if there are no updates to install.
