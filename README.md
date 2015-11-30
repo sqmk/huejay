@@ -133,7 +133,7 @@ client.users.create(user)
 
 *Note: It is possible to use Huejay to toggle the link button if you are already
 authenticated with the bridge. This may save you from walking over to the bridge
-to physically press the link button. See `client.bridge.save` and **Bridge**
+to physically press the link button. See `client.bridge.save` and __Bridge__
 `linkButtonEnabled`.*
 
 #### client.users.get - Get authenticated user
