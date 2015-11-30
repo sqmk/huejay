@@ -13,7 +13,7 @@ Use Huejay to interact with Philips Hue in the following ways:
 * [Bridge discovery](#bridge-discovery)
 * [Manage bridge settings](#bridge)
 * [Manage portal settings](#portal)
-* [Manage software updates](#software-updates)
+* [Manage software updates](#software-update)
 * [Manage users](#users)
 * Manage lights
 * Manage groups
