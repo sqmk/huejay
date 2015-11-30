@@ -395,7 +395,7 @@ client.softwareUpdate.install()
 #### client.softwareUpdate.disableInstallNotification - Disables install notification
 
 To disable the install notification (useful for mobile apps),
-`client.softwareUpdate.disableInstallNotifaction` will allow you to turn off the
+`client.softwareUpdate.disableInstallNotification` will allow you to turn off the
 notification. This only works when there are pending updates to the bridge.
 
 ```js
