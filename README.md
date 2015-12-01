@@ -15,12 +15,12 @@ Use Huejay to interact with Philips Hue in the following ways:
 * [Manage portal settings](#portal)
 * [Manage software updates](#software-update)
 * [Manage users](#users)
-* Manage lights
-* Manage groups
-* Manage schedules
-* Manage scenes
-* Manage sensors
-* Retrieve and delete rules
+* [Manage lights](#lights)
+* [Manage groups](#groups)
+* [Manage schedules](#schedules)
+* [Manage scenes](#scenes)
+* [Manage sensors](#sensors)
+* [Retrieve and delete rules](#rules)
 
 ## Installation
 
@@ -36,7 +36,7 @@ Requiring the library is simple:
 let huejay = require('huejay');
 ```
 
-Most methods return a **Promise** as a result.
+Most methods return a **Promise** as a result. These are native Node.js promises.
 
 ### Bridge Discovery
 
@@ -404,6 +404,54 @@ client.softwareUpdate.disableInstallNotification()
     console.log('Install notification is now disabled');
   });
 ```
+
+### Lights
+
+The Huejay API for managing lights is not yet finalized.
+
+You can get a sneak peek of light management through [examples](examples/lights).
+
+Expect finalization of the API in release v0.13.0. Releases are frequent, so expect this in a few days.
+
+### Groups
+
+The Huejay API for managing groups is not yet finalized.
+
+You can get a sneak peek of group management through [examples](examples/groups).
+
+Expect finalization of the API in release v0.14.0.
+
+### Schedules
+
+The Huejay API for managing schedules is not yet finalized.
+
+You can get a sneak peek of schedule management through [examples](examples/schedules).
+
+Expect finalization of the API in release v0.15.0.
+
+### Scenes
+
+The Huejay API for managing scenes is not yet finalized.
+
+You can get a sneak peek of scene management through [examples](examples/scenes).
+
+Expect finalization of the API in release v0.16.0.
+
+### Sensors
+
+The Huejay API for managing sensors is not yet finalized.
+
+You can get a sneak peek of sensor management through [examples](examples/sensors).
+
+Expect finalization of the API in release v0.17.0.
+
+### Rules
+
+The Huejay API for managing rules is not yet finalized.
+
+You can get a sneak peek of rule management through [examples](examples/rules).
+
+Expect finalization of the API in release v0.18.0.
 
 ### Time Zones
 
