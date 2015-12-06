@@ -525,8 +525,8 @@ additional details about the model:
 #### client.lights.getById - Get light by id
 
 If only a single light is needed, `client.lights.getById` can be used to fetch
-a light by its bridge id. A `Light` object is returned if the light is found,
-else a `huejay.Error` is thrown.
+a light by its bridge assigned id. A `Light` object is returned if the light is
+found, else a `huejay.Error` is thrown.
 
 ```js
 client.lights.getById(1)
