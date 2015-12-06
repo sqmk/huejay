@@ -17,6 +17,7 @@ client.lights.getAll()
       console.log(`  Model Id:         ${light.modelId}`);
       console.log('  Model:');
       console.log(`    Id:             ${light.model.id}`);
+      console.log(`    Manufacturer:   ${light.model.manufacturer}`);
       console.log(`    Name:           ${light.model.name}`);
       console.log(`    Type:           ${light.model.type}`);
       console.log(`    Color Gamut:    ${light.model.colorGamut}`);
