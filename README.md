@@ -413,6 +413,25 @@ attributes and state.
 
 #### client.lights.scan
 
+Hooked up a fresh Philips Hue bridge? Plugged in brand new bulbs or a fixture?
+Before you can interact with your new lights, you'll need to add them to your
+preferred bridge.
+
+Huejay's `client.lights.scan` will get your bridge to start scanning for new,
+unregistered lights. Scans last roughly 30 seconds. New bulbs can then be found
+by using `client.lights.getNew`.
+
+Here is an example of starting a light scan using Huejay:
+
+```js
+client.lights.scan()
+  .then(() => {
+    console.log('Started new light scan');
+  });
+```
+
+*Note: Make sure your bulbs are powered on for your bridge to find them.*
+
 #### client.lights.getNew
 
 #### client.lights.getAll
