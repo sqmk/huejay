@@ -14,6 +14,12 @@ client.lights.getById(8)
     console.log(`  Unique ID:        ${light.uniqueId}`);
     console.log(`  Manufacturer:     ${light.manufacturer}`);
     console.log(`  Model Id:         ${light.modelId}`);
+    console.log('  Model:');
+    console.log(`    Id: ${light.model.id}`);
+    console.log(`    Name: ${light.model.name}`);
+    console.log(`    Type: ${light.model.type}`);
+    console.log(`    Color Gamut: ${light.model.colorGamut}`);
+    console.log(`    Friends of Hue: ${light.model.friendsOfHue}`);
     console.log(`  Software Version: ${light.softwareVersion}`);
     console.log('  State:');
     console.log(`    On:         ${light.on}`);
