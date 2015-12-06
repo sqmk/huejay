@@ -169,7 +169,7 @@ client.users.getByUsername('usernamehere')
   });
 ```
 
-If a user is not found with the provided username, a *huejay.Error* is thrown.
+If a user is not found with the provided username, a `huejay.Error` is thrown.
 
 #### client.users.getAll - Get all users
 
@@ -523,6 +523,22 @@ additional details about the model:
 * `friendsOfHue` - `true` if Friends of Hue, `false` if not
 
 #### client.lights.getById
+
+If only a single light is needed, `client.lights.getById` can be used to fetch
+a light by it's bridge id. A `Light` object is returned if the light is found,
+else a `huejay.Error` is thrown.
+
+```js
+client.lights.getById(1)
+  .then(light => {
+    console.log('Found light:');
+    console.log(`  Light [${light.id}]: ${light.name}`);
+  })
+  .catch(error => {
+    console.log('Could not find light');
+    console.log(error.stack);
+  });
+```
 
 #### client.lights.save
 
