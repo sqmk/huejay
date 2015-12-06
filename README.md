@@ -544,6 +544,20 @@ client.lights.getById(1)
 
 #### client.lights.delete
 
+Remove a light from the bridge with `client.lights.delete`. This will accept
+either an id or a `Light` object.
+
+```js
+client.lights.delete(4)
+  .then(() => {
+    console.log('Light was deleted');
+  })
+  .catch(error => {
+    console.log('Light may have been removed already, or does not exist');
+    console.log(error.stack);
+  });
+```
+
 ### Groups
 
 The Huejay API for managing groups is not yet finalized.
