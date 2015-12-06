@@ -411,7 +411,7 @@ The Philips Hue API exposes numerous endpoints for managing your lights. Huejay
 supports it all, from searching and installing new lights, to changing light
 attributes and state.
 
-#### client.lights.scan
+#### client.lights.scan - Scan for new lights
 
 Hooked up a fresh Philips Hue bridge? Plugged in brand new bulbs or a fixture?
 Before you can interact with your new lights, you'll need to add them to your
@@ -430,7 +430,7 @@ client.lights.scan()
 
 *Note: Make sure your bulbs are powered on for your bridge to find them.*
 
-#### client.lights.getNew
+#### client.lights.getNew - Get new lights
 
 When bulbs are freshly registered on the bridge, you can retrieve them using
 `client.lights.getNew`. This command will ultimately return an array of `Light` objects.
@@ -450,7 +450,7 @@ client.lights.getNew()
 
 More information on `Light` objects is available in the following commands below.
 
-#### client.lights.getAll
+#### client.lights.getAll - Get all registered lights
 
 Huejay's `client.lights.getAll` will return a list of all registered lights on
 the bridge. Like `client.lights.getNew`, the result from the completed `Promise`
@@ -491,7 +491,7 @@ client.lights.getAll()
 
 The following `Light` attributes are available:
 * `id` - Numerical id of the light as registered on the bridge
-* `name` - Custom name for the light, configurable
+* `name` - Configurable name for the light
 * `type` - Type of light (e.g. Extended Color Light, Dimmable Light)
 * `uniqueId` - Unique Id of the light
 * `manufacturer` - Name of the manufacturer
@@ -522,10 +522,10 @@ additional details about the model:
 * `colorGamut` - The supported color gamut of the light
 * `friendsOfHue` - `true` if Friends of Hue, `false` if not
 
-#### client.lights.getById
+#### client.lights.getById - Get light by id
 
 If only a single light is needed, `client.lights.getById` can be used to fetch
-a light by it's bridge id. A `Light` object is returned if the light is found,
+a light by its bridge id. A `Light` object is returned if the light is found,
 else a `huejay.Error` is thrown.
 
 ```js
@@ -540,9 +540,53 @@ client.lights.getById(1)
   });
 ```
 
-#### client.lights.save
+#### client.lights.save - Save a light's attributes and state
 
-#### client.lights.delete
+After retrieving a `Light` object through previous commands, you can configure
+the light and save its attributes and state. This allows you to change a
+light's name, color, effect, and so on.
+
+Huejay is smart and keeps track of changed attributes and state. The client
+will only send updated values to the Philips Hue bridge, as sending all
+configurable attributes and state can affect bridge and light performance.
+
+To save a light, pass a `Light` object to `client.lights.save`. The light is
+returned after saving for convenient chaining.
+
+```js
+client.lights.getById(3)
+  .then(light => {
+    light.name = 'New light name';
+
+    light.brightness = 254;
+    light.hue        = 32554;
+    light.saturation = 254;
+
+    return client.lights.save(light);
+  })
+  .then(light => {
+    console.log(`Updated light [${light.id}]`);
+  })
+  .catch(error => {
+    console.log('Something went wrong');
+    console.log(error.stack);
+  });
+```
+
+The following `Light` object attributes and state are configurable:
+* `name`
+* `brightness`
+* `hue`
+* `saturation`
+* `xy`
+* `colorTemp`
+* `transitionTime`
+* `alert`
+* `effect`
+
+*Note: See further above for details on `Light` attributes and state*
+
+#### client.lights.delete - Delete a light
 
 Remove a light from the bridge with `client.lights.delete`. This will accept
 either an id or a `Light` object.
