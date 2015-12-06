@@ -17,8 +17,8 @@ client.lights.getAll()
 
     return client.lights.save(light);
   })
-  .then(() => {
-    console.log('Success');
+  .then(light => {
+    console.log(`Saved light [${light.id}]`);
   })
   .catch(error => {
     console.log(error.stack);
