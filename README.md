@@ -407,11 +407,21 @@ client.softwareUpdate.disableInstallNotification()
 
 ### Lights
 
-The Huejay API for managing lights is not yet finalized.
+The Philips Hue API exposes numerous endpoints for managing your lights. Huejay
+supports it all, from searching and installing new lights, to changing light
+attributes and state.
 
-You can get a sneak peek of light management through [examples](examples/lights).
+#### client.lights.scan
 
-Expect finalization of the API in release v0.13.0. Releases are frequent, so expect this in a few days.
+#### client.lights.getNew
+
+#### client.lights.getAll
+
+#### client.lights.getById
+
+#### client.lights.save
+
+#### client.lights.delete
 
 ### Groups
 
