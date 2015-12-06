@@ -452,6 +452,76 @@ More information on `Light` objects is available in the following commands below
 
 #### client.lights.getAll
 
+Huejay's `client.lights.getAll` will return a list of all registered lights on
+the bridge. Like `client.lights.getNew`, the result from the completed `Promise`
+will be an array of `Light` objects.
+
+```js
+client.lights.getAll()
+  .then(lights => {
+    for (let light of lights) {
+      console.log(`Light [${light.id}]: ${light.name}`);
+      console.log(`  Type:             ${light.type}`);
+      console.log(`  Unique ID:        ${light.uniqueId}`);
+      console.log(`  Manufacturer:     ${light.manufacturer}`);
+      console.log(`  Model Id:         ${light.modelId}`);
+      console.log('  Model:');
+      console.log(`    Id:             ${light.model.id}`);
+      console.log(`    Manufacturer:   ${light.model.manufacturer}`);
+      console.log(`    Name:           ${light.model.name}`);
+      console.log(`    Type:           ${light.model.type}`);
+      console.log(`    Color Gamut:    ${light.model.colorGamut}`);
+      console.log(`    Friends of Hue: ${light.model.friendsOfHue}`);
+      console.log(`  Software Version: ${light.softwareVersion}`);
+      console.log('  State:');
+      console.log(`    On:         ${light.on}`);
+      console.log(`    Reachable:  ${light.reachable}`);
+      console.log(`    Brightness: ${light.brightness}`);
+      console.log(`    Color mode: ${light.colorMode}`);
+      console.log(`    Hue:        ${light.hue}`);
+      console.log(`    Saturation: ${light.saturation}`);
+      console.log(`    X/Y:        ${light.xy[0]}, ${light.xy[1]}`);
+      console.log(`    Color Temp: ${light.colorTemp}`);
+      console.log(`    Alert:      ${light.alert}`);
+      console.log(`    Effect:     ${light.effect}`);
+      console.log();
+    }
+  });
+```
+
+The following `Light` attributes are available:
+* `id` - Numerical id of the light as registered on the bridge
+* `name` - Custom name for the light, configurable
+* `type` - Type of light (e.g. Extended Color Light, Dimmable Light)
+* `uniqueId` - Unique Id of the light
+* `manufacturer` - Name of the manufacturer
+* `modelId` - Model Id of the light, used for determining `LightModel`
+* `model` - A `LightModel` object, containing details about the model (not available in other Node.js clients!)
+* `softwareVersion` - Software version of the light
+
+The following `Light` state is available:
+* `on` - `true` if the light is on, `false` if not
+* `reachable` - `true` if the light can be communicated with, `false` if not
+* `brightness` - Configurable brightness of the light (value from 0 to 254)
+* `colorMode` - Color mode light is respecting (e.g. ct, xy, hs)
+* `hue` - Configurable hue of the light (value from 0 to 65535)
+* `saturation` - Configurable saturation of the light, compliments `hue` (value from 0 to 254)
+* `xy` - Configurable CIE x and y coordinates (value is an array containing x and y values)
+* `colorTemp` - Configurable Mired Color temperature of the light (value from 153 to 500)
+* `transitionTime` - Configurable temporary value which eases transition of an effect (value in seconds, 0 for instant, 5 for five seconds)
+* `alert` - Configurable alert effect (e.g. none, select, lselect)
+* `effect` - Configurable effect (e.g. none, colorloop)
+
+Huejay is the only Node.js client that maintains a list of Philips Hue supported
+models. The `Light` `model` attribute returns a `LightModel` object which contains
+additional details about the model:
+* `id` - Model Id, typically the same value as `Light` `modelId`
+* `manufacturer` - Manufacturer, typically the same value as `Light` `manufacturer`
+* `name` - Name of the model / product (e.g. Hue Spot GU10)
+* `type` - Type of light, typically the same value as `Light` `type`
+* `colorGamut` - The supported color gamut of the light
+* `friendsOfHue` - `true` if Friends of Hue, `false` if not
+
 #### client.lights.getById
 
 #### client.lights.save
