@@ -7,14 +7,14 @@ let client = require('../init-client');
 console.log('Creating group...');
 
 let group = new client.groups.Group;
-group.name = 'Group name here';
-group.lights = [8, 9];
+group.name     = 'Group name here';
+group.lightIds = [8, 9];
 
 client.groups.create(group)
   .then(group => {
     console.log(`New group [${group.id}]:`);
     console.log(`  Name: ${group.name}`);
-    console.log('  Lights: ' + group.lights.join(', '));
+    console.log('  Light Ids: ' + group.lightIds.join(', '));
 
     return group.id;
   })
@@ -27,7 +27,7 @@ client.groups.create(group)
     console.log('Updating group and changing state');
 
     group.name           = 'New group name here';
-    group.lights         = [8, 9, 10, 11];
+    group.lightIds       = [8, 9, 10, 11];
     group.on             = true;
     group.brightness     = 254;
     group.transitionTime = 0;

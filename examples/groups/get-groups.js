@@ -12,7 +12,7 @@ client.groups.getAll()
     for (let group of groups) {
       console.log(`Group [${group.id}]: ${group.name}`);
       console.log(`  Type: ${group.type}`);
-      console.log('  Lights: ' + group.lights.join(', '));
+      console.log('  Light Ids: ' + group.lightIds.join(', '));
       console.log('  State:');
       console.log(`    On:         ${group.on}`);
       console.log(`    Brightness: ${group.brightness}`);
@@ -23,6 +23,17 @@ client.groups.getAll()
       console.log(`    Color Temp: ${group.colorTemp}`);
       console.log(`    Alert:      ${group.alert}`);
       console.log(`    Effect:     ${group.effect}`);
+
+      if (group.modelId !== undefined) {
+        console.log(`  Model Id: ${group.modelId}`);
+        console.log(`  Unique Id: ${group.uniqueId}`);
+        console.log('  Model:');
+        console.log(`    Id:             ${group.model.id}`);
+        console.log(`    Manufacturer:   ${group.model.manufacturer}`);
+        console.log(`    Name:           ${group.model.name}`);
+        console.log(`    Type:           ${group.model.type}`);
+      }
+
       console.log();
     }
   })
