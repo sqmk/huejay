@@ -604,11 +604,15 @@ client.lights.delete(4)
 
 ### Groups
 
-The Huejay API for managing groups is not yet finalized.
+#### client.groups.getAll - Get all groups
 
-You can get a sneak peek of group management through [examples](examples/groups).
+#### client.groups.getById - Get group by id
 
-Expect finalization of the API in release v0.14.0.
+#### client.groups.create - Create a group
+
+#### client.groups.save - Save a group's attributes and state
+
+#### client.groups.delete - Delete a group
 
 ### Schedules
 
