@@ -604,6 +604,18 @@ client.lights.delete(4)
 
 ### Groups
 
+The Philips Hue bridge offers the convenience of managing groups of lights.
+Rather than setting individual light brightness, color, and other options, you
+can apply the same changes on a group and have it applied to all linked lights.
+Huejay provides a complete interface for managing groups.
+
+Groups may also represent multisource luminaires. Philips offers several products
+which consist of several color changing lights. Upon registering one of these
+products with the bridge, a new group is created which represents the logical
+grouping of the included lights. Huejay offers a simple means of retrieving
+luminaire production information, as well as configuration of these high-end
+fixtures.
+
 #### client.groups.getAll - Get all groups
 
 #### client.groups.getById - Get group by id
@@ -620,7 +632,7 @@ The Huejay API for managing schedules is not yet finalized.
 
 You can get a sneak peek of schedule management through [examples](examples/schedules).
 
-Expect finalization of the API in release v0.15.0.
+Expect finalization of the API in release v0.16.0.
 
 ### Scenes
 
@@ -628,7 +640,7 @@ The Huejay API for managing scenes is not yet finalized.
 
 You can get a sneak peek of scene management through [examples](examples/scenes).
 
-Expect finalization of the API in release v0.16.0.
+Expect finalization of the API in release v0.15.0.
 
 ### Sensors
 
