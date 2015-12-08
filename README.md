@@ -749,7 +749,7 @@ creation if state is configured.*
 
 You can modify a `Group`'s attributes and state after creation/retrieval, and
 then apply the changes on the bridge. Like `Light` objects, Huejay will only
-apply changes when saving configuration.
+apply deltas when saving groups.
 
 To apply changes, use `client.groups.save`. The `Group` object is returned upon
 save completion.
