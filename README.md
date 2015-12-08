@@ -604,10 +604,10 @@ client.lights.delete(4)
 
 ### Groups
 
-The Philips Hue bridge offers the convenience of managing groups of lights.
-Rather than setting individual light brightness, color, and other options, you
-can apply the same changes on a group and have it applied to all linked lights.
-Huejay provides a complete interface for managing groups.
+The Philips Hue bridge offers the convenience of grouping lights. Rather than
+setting individual light brightness, color, and other options, you can apply the
+same changes on a group and have it applied to all linked lights. Huejay
+provides a complete interface for managing groups on the bridge.
 
 Groups may also represent multisource luminaires. Philips offers several products
 which consist of several color changing lights. Upon registering one of these
@@ -625,6 +625,23 @@ fixtures.
 #### client.groups.save - Save a group's attributes and state
 
 #### client.groups.delete - Delete a group
+
+To delete a group from the bridge, pass a group id or `Group` object to
+`client.groups.delete`.
+
+```js
+client.groups.delete(3)
+  .then(() => {
+    console.log('Group was deleted');
+  })
+  .catch(error => {
+    console.log('Group may have been removed already, or does not exist');
+    console.log(error.stack);
+  });
+```
+
+*Note: It is not possible to delete multisource groups. Expect a `huejay.Error`
+to be thrown if attempting to do so.*
 
 ### Schedules
 
@@ -672,8 +689,8 @@ You can retrieve a list of supported time zones by calling
 ```js
 client.timeZones.getAll()
   .then(timeZones => {
-    for (let tz of timeZones) {
-      console.log(tz);
+    for (let timeZone of timeZones) {
+      console.log(timeZone);
     }
   });
 ```
