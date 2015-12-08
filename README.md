@@ -500,7 +500,7 @@ The following `Light` attributes are available:
 * `softwareVersion` - Software version of the light
 
 The following `Light` state is available:
-* `on` - `true` if the light is on, `false` if not
+* `on` - `true` if the light is on, `false` if not, configurable
 * `reachable` - `true` if the light can be communicated with, `false` if not
 * `brightness` - Configurable brightness of the light (value from 0 to 254)
 * `colorMode` - Color mode light is respecting (e.g. ct, xy, hs)
@@ -544,7 +544,8 @@ client.lights.getById(1)
 
 After retrieving a `Light` object through previous commands, you can configure
 the light and save its attributes and state. This allows you to change a
-light's name, color, effect, and so on.
+light's name, color, effect, and so on. You can set various properties on a
+`Light` object, and save them via `client.lights.save`.
 
 Huejay is smart and keeps track of changed attributes and state. The client
 will only send updated values to the Philips Hue bridge, as sending all
@@ -575,6 +576,7 @@ client.lights.getById(3)
 
 The following `Light` object attributes and state are configurable:
 * `name`
+* `on`
 * `brightness`
 * `hue`
 * `saturation`
@@ -618,11 +620,172 @@ fixtures.
 
 #### client.groups.getAll - Get all groups
 
+Use `client.groups.getAll` to retrieve all groups created on the bridge. This
+command eventually returns an array of `Group` objects. See further below for
+`Group` object information.
+
+```js
+client.groups.getAll()
+  .then(groups => {
+    for (let group of groups) {
+      console.log(`Group [${group.id}]: ${group.name}`);
+      console.log(`  Type: ${group.type}`);
+      console.log('  Light Ids: ' + group.lightIds.join(', '));
+      console.log('  State:');
+      console.log(`    On:         ${group.on}`);
+      console.log(`    Brightness: ${group.brightness}`);
+      console.log(`    Color mode: ${group.colorMode}`);
+      console.log(`    Hue:        ${group.hue}`);
+      console.log(`    Saturation: ${group.saturation}`);
+      console.log(`    X/Y:        ${group.xy[0]}, ${group.xy[1]}`);
+      console.log(`    Color Temp: ${group.colorTemp}`);
+      console.log(`    Alert:      ${group.alert}`);
+      console.log(`    Effect:     ${group.effect}`);
+
+      if (group.modelId !== undefined) {
+        console.log(`  Model Id: ${group.modelId}`);
+        console.log(`  Unique Id: ${group.uniqueId}`);
+        console.log('  Model:');
+        console.log(`    Id:             ${group.model.id}`);
+        console.log(`    Manufacturer:   ${group.model.manufacturer}`);
+        console.log(`    Name:           ${group.model.name}`);
+        console.log(`    Type:           ${group.model.type}`);
+      }
+
+      console.log();
+    }
+  });
+```
+
+As demonstrated in the example above, group attributes and state are available
+via `Group` objects.
+
+Here are the following attributes available on `Group`:
+* `id` - Group Id, generated automatically by the bridge
+* `name` - Configurable name for the group
+* `type` - Type of group (e.g. LightGroup, Luminaire, LightSource)
+* `lightIds` - An array of light ids associated with the group
+* `modelId` - Available only for multisource luminaires, this is the model id of the fixture
+* `uniqueId` - Available only for multisource luminaires, this is the unique id of the fixture
+* `model` - Available when `modelId` is present, a `GroupModel` object that contains details about the model
+
+Similar to `Light` objects, `Group` objects provide state options for
+the lights associated with the group:
+* `on` - `true` for lights on, `false` if not, configurable
+* `brightness` - Configurable brightness for the lights (value from 0 to 254)
+* `colorMode` - Color mode group is respecting (e.g. ct, xy, hs)
+* `hue` - Configurable hue of the lights (value from 0 to 65535)
+* `saturation` - Configurable saturation of the lights, compliments `hue` (value from 0 to 254)
+* `xy` - Configurable CIE x and y coordinates (value is an array containing x and y values)
+* `colorTemp` - Configurable Mired Color temperature of the lights (value from 153 to 500)
+* `transitionTime` - Configurable temporary value which eases transition of an effect (value in seconds, 0 for instant, 5 for five seconds)
+* `alert` - Configurable alert effect (e.g. none, select, lselect)
+* `effect` - Configurable effect (e.g. none, colorloop)
+
+Huejay maintains a list of Philips Hue supported luminaire models. The `Group`
+`model` attribute returns a `GroupModel` object. This object contains more
+information about the model:
+* `id` - Model Id, typically the same value as `Group` `modelId`
+* `manufacturer` - Manufacturer of the model (e.g. Philips)
+* `name` - Name of the model / product (e.g. Hue Beyond Table)
+* `type` - Type of group, typically the same value as `Group` `type`
+
+*Note: The `client.groups.getAll` command does not return special group 0.
+See `client.groups.getById` for instructions on retrieving this special group.*
+
 #### client.groups.getById - Get group by id
+
+Need a specific group? `client.groups.getById` accepts a group id. If a group
+exists with that id, a `Group` object is returned, else a `huejay.Error` is
+thrown.
+
+```js
+client.groups.getById(3)
+  .then(group => {
+    console.log('Found group:');
+    console.log(`  Group [${group.id}]: ${group.name}`);
+  })
+  .catch(error => {
+    console.log('Could not find group');
+    console.log(error.stack);
+  });
+```
+
+A **special group** is available which is accessible via group id **0**. This
+group always contains all light ids registered on the bridge. Use this group
+to control all lights at once.
+
+```js
+client.groups.getById(0)
+  .then(group => {
+    console.log('Special group 0');
+    console.log('  Light Ids: ' + group.lightIds.join(', '));
+  });
+```
 
 #### client.groups.create - Create a group
 
+Creating a group is easy using Huejay. Instantiate a new `client.groups.Group`
+object and set both a name and list of light ids.
+
+```js
+let group = new client.groups.Group;
+group.name     = 'New group';
+group.lightIds = [2, 4, 5];
+
+client.groups.create(group)
+  .then(group => {
+    console.log(`Group [${group.id}] created`);
+  })
+  .catch(error => {
+    console.log(error.stack);
+  });
+```
+
+*Note: State is not saved on group creation. You must save the group after
+creation if state is configured.*
+
 #### client.groups.save - Save a group's attributes and state
+
+You can modify a `Group`'s attributes and state after creation/retrieval, and
+then apply the changes on the bridge. Like `Light` objects, Huejay will only
+apply changes when saving configuration.
+
+To apply changes, use `client.groups.save`. The `Group` object is returned upon
+save completion.
+
+```js
+client.groups.getById(6)
+  .then(group => {
+    group.name       = 'Brand new name';
+    group.lightIds   = [4, 6, 8];
+
+    group.on         = true;
+    group.brightness = 254;
+    group.effect     = 'colorloop';
+
+    return client.groups.save(group);
+  })
+  .then(group => {
+    console.log(` Group [${group.id}] was saved`);
+  })
+  .catch(error => {
+    console.log(error.stack);
+  });
+```
+
+The following `Group` object attributes and state are configurable:
+* `name`
+* `lightIds`
+* `on`
+* `brightness`
+* `hue`
+* `saturation`
+* `xy`
+* `colorTemp`
+* `transitionTime`
+* `alert`
+* `effect`
 
 #### client.groups.delete - Delete a group
 
