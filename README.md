@@ -816,11 +816,13 @@ Expect finalization of the API in release v0.16.0.
 
 ### Scenes
 
-The Huejay API for managing scenes is not yet finalized.
+#### client.scenes.getAll
 
-You can get a sneak peek of scene management through [examples](examples/scenes).
+#### client.scenes.getById
 
-Expect finalization of the API in release v0.15.0.
+#### client.scenes.create
+
+#### client.scenes.saveLightState
 
 ### Sensors
 
