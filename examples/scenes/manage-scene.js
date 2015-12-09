@@ -7,8 +7,8 @@ let client = require('../init-client');
 console.log('Creating scene and retrieving light...');
 
 let scene = new client.scenes.Scene('huejay-test');
-scene.name = 'Huejay test';
-scene.lights = [8, 9, 10];
+scene.name           = 'Huejay test';
+scene.lightIds       = [8, 9, 10];
 scene.transitionTime = 2;
 
 Promise.all([
