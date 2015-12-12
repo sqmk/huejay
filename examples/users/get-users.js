@@ -12,8 +12,8 @@ client.users.getAll()
     for (let user of users) {
       console.log(` Username: ${user.username}`);
       console.log(` Device type: ${user.deviceType}`);
-      console.log(` Create date: ${user.createDate}`);
-      console.log(` Last use date: ${user.lastUseDate}`);
+      console.log(` Create date: ${user.created}`);
+      console.log(` Last use date: ${user.lastUsed}`);
       console.log();
     }
   })

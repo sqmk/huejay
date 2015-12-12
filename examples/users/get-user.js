@@ -14,8 +14,8 @@ client.users.get()
 
     console.log(` Username: ${user.username}`);
     console.log(` Device type: ${user.deviceType}`);
-    console.log(` Create date: ${user.createDate}`);
-    console.log(` Last use date: ${user.lastUseDate}`);
+    console.log(` Create date: ${user.created}`);
+    console.log(` Last use date: ${user.lastUsed}`);
   })
   .catch(error => {
     console.log(error.stack);

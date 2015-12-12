@@ -146,8 +146,8 @@ client.users.get()
   .then(user => {
     console.log(`Username: ${user.username}`);
     console.log(`Device type: ${user.deviceType}`);
-    console.log(`Create date: ${user.createDate}`);
-    console.log(`Last use date: ${user.lastUseDate}`);
+    console.log(`Create date: ${user.created}`);
+    console.log(`Last use date: ${user.lastUsed}`);
   });
 ```
 
@@ -818,9 +818,44 @@ Expect finalization of the API in release v0.16.0.
 
 #### client.scenes.getAll
 
+Retrieves all scenes from the bridge. This command returns an array of `Scene`
+objects.
+
+```js
+client.scenes.getAll()
+  .then(scenes => {
+    for (let scene of scenes) {
+      console.log(`Scene [${scene.id}]: ${scene.name}`);
+      console.log('  Lights: ' + scene.lightIds.join(', '));
+      console.log();
+    }
+  });
+```
+
+`Scene` objects are composed of the following attributes:
+* `id` - User/application defined scene id (e.g. my-scene-id)
+* `name` - Configurable name
+* `lightIds` - An array of associated light ids
+* `transitionTime` - Always `null` on access, but can be configured
+
 #### client.scenes.getById
 
+```js
+client.scenes.getById('my-scene')
+  .then(scene => {
+    console.log(`Scene [${scene.id}]: ${scene.name}`);
+    console.log('  Lights: ' + scene.lightIds.join(', '));
+    console.log();
+  })
+  .catch(error => {
+    console.log(error.stack);
+  });
+```
+
 #### client.scenes.create
+
+Scene creation is a breeze. Instantiate a new `client.scenes.Scene`
+object and set an id, name, and list of light ids.
 
 #### client.scenes.saveLightState
 
