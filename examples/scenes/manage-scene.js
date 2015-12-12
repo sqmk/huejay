@@ -4,30 +4,30 @@
 
 let client = require('../init-client');
 
-console.log('Creating scene and retrieving light...');
+console.log('Creating scene...');
 
-let scene = new client.scenes.Scene('huejay-test');
+let scene = new client.scenes.Scene;
 scene.name           = 'Huejay test';
 scene.lightIds       = [8, 9, 10];
+scene.recycle        = false;
 scene.transitionTime = 2;
+scene.appData        = {version: 1, data: "custom data"};
 
-Promise.all([
-  client.scenes.create(scene),
-  client.lights.getById(8)
-])
-  .then(results => {
-    console.log('Scene created...');
-    console.log('Light found...');
+client.scenes.create(scene)
+  .then(scene => {
+    console.log(`Scene [${scene.id}] created...`);
 
-    let scene = results[0];
-    let light = results[1];
+    scene.name = 'New scene name';
 
-    console.log('Saving scene light state...');
+    return client.scenes.save(scene);
+  })
+  .then(scene => {
+    console.log(`Scene saved...`);
 
-    return client.scenes.saveLightState(scene, light, ['brightness']);
+    return client.scenes.delete(scene);
   })
   .then(() => {
-    console.log('Light state saved on scene...');
+    console.log('Scene deleted...');
   })
   .catch(error => {
     console.log(error.stack);
