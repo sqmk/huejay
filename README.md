@@ -857,7 +857,9 @@ client.scenes.getById('my-scene')
 Scene creation is a breeze. Instantiate a new `client.scenes.Scene`
 object and set an id, name, and list of light ids.
 
-#### client.scenes.saveLightState
+#### client.scenes.save
+
+#### client.scenes.delete
 
 ### Sensors
 
