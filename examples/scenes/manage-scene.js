@@ -17,7 +17,28 @@ client.scenes.create(scene)
   .then(scene => {
     console.log(`Scene [${scene.id}] created...`);
 
+    console.log('  Name:', scene.name);
+    console.log('  Lights:', scene.lightIds.join(', '));
+    console.log('  Owner:', scene.owner);
+    console.log('  Recycle:', scene.recycle);
+    console.log('  Locked:', scene.locked);
+    console.log('  App data:', scene.appData);
+    console.log('  Picture:', scene.picture);
+    console.log('  Last Updated:', scene.lastUpdated);
+    console.log('  Version:', scene.version);
+    console.log();
+
     scene.name = 'New scene name';
+
+    scene.setLightState(10, {
+      brightness: 254,
+      colorTemp: 300,
+    });
+
+    scene.setLightState(9, {
+      brightness: 254,
+      colorTemp: 250
+    });
 
     return client.scenes.save(scene);
   })
