@@ -12,6 +12,7 @@ client.groups.getAll()
     for (let group of groups) {
       console.log(`Group [${group.id}]: ${group.name}`);
       console.log(`  Type: ${group.type}`);
+      console.log(`  Class: ${group.class}`);
       console.log('  Light Ids: ' + group.lightIds.join(', '));
       console.log('  State:');
       console.log(`    On:         ${group.on}`);
