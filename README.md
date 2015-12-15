@@ -681,6 +681,7 @@ the lights associated with the group:
 * `transitionTime` - Configurable temporary value which eases transition of an effect (value in seconds, 0 for instant, 5 for five seconds)
 * `alert` - Configurable alert effect (e.g. none, select, lselect)
 * `effect` - Configurable effect (e.g. none, colorloop)
+* `scene` - Configurable scene
 
 Huejay maintains a list of Philips Hue supported luminaire models. The `Group`
 `model` attribute returns a `GroupModel` object. This object contains more
@@ -816,6 +817,11 @@ Expect finalization of the API in release v0.16.0.
 
 ### Scenes
 
+Huejay supports managing scenes on the Philips Hue. Scenes are the best way of
+storing and recalling commonly used light configurations in your home.
+
+*Note: To recall a scene, set the `scene` attribute on a `Group` object and save.*
+
 #### client.scenes.getAll
 
 Retrieves all scenes from the bridge. This command returns an array of `Scene`
@@ -835,13 +841,27 @@ client.scenes.getAll()
 `Scene` objects are composed of the following attributes:
 * `id` - User/application defined scene id (e.g. my-scene-id)
 * `name` - Configurable name
-* `lightIds` - An array of associated light ids
+* `lightIds` - Configurable array of associated light ids
+* `owner` - User who created the scene
+* `recycle` - Configurable option which will auto delete the scene
+* `locked` - If `true`, scene is not deletable as it is being used by another resource
+* `appData` - A configurable object consisting of `version` and `data` properties
+* `picture` - Future field, probably storing picture URL
+* `lastUpdated` - Date when scene was last updated
+* `captureLightState` - Set to `true` to capture current light state for the scene
 * `transitionTime` - Always `null` on access, but can be configured
+
+The following methods are available on `Scene` objects:
+* `getLightState(lightId)` - Get light state by light id. Values only available by `getById`.
+* `setLightState(lightId, {property: 'value'})` - Set light state by light id.
 
 #### client.scenes.getById
 
+Retrieve a single scene by id. If the scene is not available, a `huejay.Error`
+is thrown.
+
 ```js
-client.scenes.getById('my-scene')
+client.scenes.getById('123456abcdef')
   .then(scene => {
     console.log(`Scene [${scene.id}]: ${scene.name}`);
     console.log('  Lights: ' + scene.lightIds.join(', '));
@@ -854,12 +874,95 @@ client.scenes.getById('my-scene')
 
 #### client.scenes.create
 
-Scene creation is a breeze. Instantiate a new `client.scenes.Scene`
-object and set an id, name, and list of light ids.
+Scene creation is a breeze. Instantiate a new `client.scenes.Scene`, set a name,
+lightIds, other attributes, and pass to `client.scenes.create`.
+
+```js
+let scene = new client.scenes.Scene;
+scene.name           = 'Scene name';
+scene.lightIds       = [1, 2, 3];
+scene.recycle        = false;
+scene.appData        = {version: 1, data: 'optional app data'};
+scene.transitionTime = 2;
+
+client.scenes.create(scene)
+  .then(scene => {
+    console.log(`Scene [${scene.id}] created...`);
+
+    console.log('  Name:', scene.name);
+    console.log('  Lights:', scene.lightIds.join(', '));
+    console.log('  Owner:', scene.owner);
+    console.log('  Recycle:', scene.recycle);
+    console.log('  Locked:', scene.locked);
+    console.log('  App data:', scene.appData);
+    console.log('  Picture:', scene.picture);
+    console.log('  Last Updated:', scene.lastUpdated);
+    console.log('  Version:', scene.version);
+  })
+  .catch(error => {
+    console.log(error.stack);
+  });
+```
+
+These `Scene` object attributes can be configured for creation:
+* `name`
+* `lightIds`
+* `recycle`
+* `appData`
+* `captureLightState`
 
 #### client.scenes.save
 
+`Scene` objects can be reconfigured and saved using `client.scenes.save`. Light
+states can be configured with this command.
+
+```js
+client.scenes.getById('123456abcdef')
+  .then(scene => {
+
+    scene.name = 'New scene name';
+    scene.lightIds = [9, 10];
+
+    // Set light state for light id 9
+    scene.setLightState(9, {
+      brightness: 254,
+      colorTemp:  250,
+    });
+
+    // Set light state for light id 10
+    scene.setLightState(10, {
+      brightness: 128,
+      colorTemp:  300,
+      effect:     'colorloop',
+    });
+
+    return client.scenes.save(scene)
+  })
+  .then(scene => {
+    console.log(`Scene saved...`);
+  })
+  .catch(error => {
+    console.log(error.stack);
+  });
+```
+
 #### client.scenes.delete
+
+To delete a `Scene` object, provide a scene id or `Scene` object to
+`client.scenes.delete`.
+
+```js
+client.scenes.delete('123456abcdef')
+  .then(() => {
+    console.log('Scene was deleted');
+  })
+  .catch(error => {
+    console.log('Scene may have been removed already, or does not exist');
+    console.log(error.stack);
+  });
+```
+
+*Note: Scenes being used or referenced by other resources may not be deleted.*
 
 ### Sensors
 
