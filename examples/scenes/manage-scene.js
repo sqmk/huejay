@@ -10,8 +10,8 @@ let scene = new client.scenes.Scene;
 scene.name           = 'Huejay test';
 scene.lightIds       = [8, 9, 10];
 scene.recycle        = false;
-scene.transitionTime = 2;
 scene.appData        = {version: 1, data: "custom data"};
+scene.transitionTime = 2;
 
 client.scenes.create(scene)
   .then(scene => {
