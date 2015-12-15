@@ -822,7 +822,7 @@ storing and recalling commonly used light configurations in your home.
 
 *Note: To recall a scene, set the `scene` attribute on a `Group` object and save.*
 
-#### client.scenes.getAll
+#### client.scenes.getAll - Retrieve all scenes
 
 Retrieves all scenes from the bridge. This command returns an array of `Scene`
 objects.
@@ -855,7 +855,7 @@ The following methods are available on `Scene` objects:
 * `getLightState(lightId)` - Get light state by light id. Values only available by `getById`.
 * `setLightState(lightId, {property: 'value'})` - Set light state by light id.
 
-#### client.scenes.getById
+#### client.scenes.getById - Retrieve scene by id
 
 Retrieve a single scene by id. If the scene is not available, a `huejay.Error`
 is thrown.
@@ -872,7 +872,7 @@ client.scenes.getById('123456abcdef')
   });
 ```
 
-#### client.scenes.create
+#### client.scenes.create - Create a scene
 
 Scene creation is a breeze. Instantiate a new `client.scenes.Scene`, set a name,
 lightIds, other attributes, and pass to `client.scenes.create`.
@@ -911,7 +911,7 @@ These `Scene` object attributes can be configured for creation:
 * `appData`
 * `captureLightState`
 
-#### client.scenes.save
+#### client.scenes.save - Save a scene
 
 `Scene` objects can be reconfigured and saved using `client.scenes.save`. Light
 states can be configured with this command.
@@ -950,7 +950,7 @@ client.scenes.getById('123456abcdef')
   });
 ```
 
-#### client.scenes.delete
+#### client.scenes.delete - Delete a scene
 
 To delete a `Scene` object, provide a scene id or `Scene` object to
 `client.scenes.delete`.
