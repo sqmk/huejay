@@ -22,6 +22,10 @@ Use Huejay to interact with Philips Hue in the following ways:
 * [Manage sensors](#sensors)
 * [Retrieve and delete rules](#rules)
 
+Supported Philips Hue API version: **1.11.0**
+
+Apple HomeKit is now supported.
+
 ## Installation
 
 Huejay was written for **Node.js 4+**.
@@ -630,6 +634,7 @@ client.groups.getAll()
     for (let group of groups) {
       console.log(`Group [${group.id}]: ${group.name}`);
       console.log(`  Type: ${group.type}`);
+      console.log(`  Class: ${group.class}`);
       console.log('  Light Ids: ' + group.lightIds.join(', '));
       console.log('  State:');
       console.log(`    On:         ${group.on}`);
@@ -646,10 +651,10 @@ client.groups.getAll()
         console.log(`  Model Id: ${group.modelId}`);
         console.log(`  Unique Id: ${group.uniqueId}`);
         console.log('  Model:');
-        console.log(`    Id:             ${group.model.id}`);
-        console.log(`    Manufacturer:   ${group.model.manufacturer}`);
-        console.log(`    Name:           ${group.model.name}`);
-        console.log(`    Type:           ${group.model.type}`);
+        console.log(`    Id:           ${group.model.id}`);
+        console.log(`    Manufacturer: ${group.model.manufacturer}`);
+        console.log(`    Name:         ${group.model.name}`);
+        console.log(`    Type:         ${group.model.type}`);
       }
 
       console.log();
@@ -663,7 +668,8 @@ via `Group` objects.
 Here are the following attributes available on `Group`:
 * `id` - Group Id, generated automatically by the bridge
 * `name` - Configurable name for the group
-* `type` - Type of group (e.g. LightGroup, Luminaire, LightSource)
+* `type` - Configurable type of group (e.g. LightGroup, Luminaire, LightSource, Room)
+* `class` - When `type` is set to `Room`, a class (see below) is available and configurable (e.g. Living room, Office)
 * `lightIds` - An array of light ids associated with the group
 * `modelId` - Available only for multisource luminaires, this is the model id of the fixture
 * `uniqueId` - Available only for multisource luminaires, this is the unique id of the fixture
@@ -690,6 +696,20 @@ information about the model:
 * `manufacturer` - Manufacturer of the model (e.g. Philips)
 * `name` - Name of the model / product (e.g. Hue Beyond Table)
 * `type` - Type of group, typically the same value as `Group` `type`
+
+When a `Group`'s `type` is `Room`, the following classes can be associated with the group:
+| Class        |              |
+| ------------ | ------------ |
+| Living room  | Gym          |
+| Kitchen      | Hallway      |
+| Dining       | Toilet       |
+| Bathroom     | Front door   |
+| Bedroom      | Garage       |
+| Kids bedroom | Terrace      |
+| Nursery      | Garden       |
+| Recreation   | Driveway     |
+| Office       | Other        |
+| Carport      |              |
 
 *Note: The `client.groups.getAll` command does not return special group 0.
 See `client.groups.getById` for instructions on retrieving this special group.*
