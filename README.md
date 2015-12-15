@@ -916,6 +916,10 @@ These `Scene` object attributes can be configured for creation:
 `Scene` objects can be reconfigured and saved using `client.scenes.save`. Light
 states can be configured with this command.
 
+**Important: Setting light state in API v1.11.0 appears to be broken. Huejay
+will throw a `huejay.Error` when configuring a light state for an id. It is
+expected that this feature will be fixed in an upcoming bridge update.**
+
 ```js
 client.scenes.getById('123456abcdef')
   .then(scene => {
