@@ -698,6 +698,7 @@ information about the model:
 * `type` - Type of group, typically the same value as `Group` `type`
 
 When a `Group`'s `type` is `Room`, the following classes can be associated with the group:
+
 | Class        |              |
 | ------------ | ------------ |
 | Living room  | Gym          |
