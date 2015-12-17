@@ -8,10 +8,10 @@ console.log('Creating scene...');
 
 let scene = new client.scenes.Scene;
 scene.name           = 'Huejay test';
-scene.lightIds       = [8, 9, 10];
+scene.lightIds       = [1, 2];
 scene.recycle        = false;
 scene.appData        = {version: 1, data: "custom data"};
-scene.transitionTime = 2;
+scene.transitionTime = 0;
 
 client.scenes.create(scene)
   .then(scene => {
@@ -30,12 +30,12 @@ client.scenes.create(scene)
 
     scene.name = 'New scene name';
 
-    scene.setLightState(10, {
+    scene.setLightState(1, {
       brightness: 254,
       colorTemp: 300,
     });
 
-    scene.setLightState(9, {
+    scene.setLightState(2, {
       brightness: 254,
       colorTemp: 250
     });
