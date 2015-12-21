@@ -148,10 +148,10 @@ this user by calling `client.users.get`.
 ```js
 client.users.get()
   .then(user => {
-    console.log(`Username: ${user.username}`);
-    console.log(`Device type: ${user.deviceType}`);
-    console.log(`Create date: ${user.created}`);
-    console.log(`Last use date: ${user.lastUsed}`);
+    console.log('Username:', user.username);
+    console.log('Device type:', user.deviceType);
+    console.log('Create date:', user.created);
+    console.log('Last use date:', user.lastUsed);
   });
 ```
 
@@ -251,8 +251,8 @@ and saving configuration.
 client.bridge.get()
   .then(bridge => {
     console.log(`Retrieved bridge ${bridge.name}`);
-    console.log(`  Id: ${bridge.id}`);
-    console.log(`  Model Id: ${bridge.modelId}`);
+    console.log('  Id:', bridge.id);
+    console.log('  Model Id:', bridge.modelId);
   });
 ```
 
@@ -328,10 +328,10 @@ return a `Portal` object.
 ```js
 client.portal.get()
   .then(portal => {
-    console.log(`Is signed on: ${portal.signedOn}`);
-    console.log(`Incoming: ${portal.incoming}`);
-    console.log(`Outgoing: ${portal.outgoing}`);
-    console.log(`Communication: ${portal.communication}`);
+    console.log('Is signed on:', portal.signedOn);
+    console.log('Incoming:', portal.incoming);
+    console.log('Outgoing:', portal.outgoing);
+    console.log('Communication:', portal.communication);
   });
 ```
 
@@ -349,9 +349,9 @@ pending updates to the bridge or other resources.
 ```js
 client.softwareUpdate.get()
   .then(softwareUpdate => {
-    console.log(`State: ${softwareUpdate.state}`);
-    console.log(`Release URL: ${softwareUpdate.releaseUrl}`);
-    console.log(`Release notes: ${softwareUpdate.releaseNotes}`);
+    console.log('State:', softwareUpdate.state);
+    console.log('Release URL:', softwareUpdate.releaseUrl);
+    console.log('Release notes:', softwareUpdate.releaseNotes);
   });
 ```
 
@@ -445,9 +445,9 @@ client.lights.getNew()
     console.log('Found new lights:');
     for (let light of lights) {
       console.log(`Light [${light.id}]:`);
-      console.log(`  Unique Id: ${light.uniqueId}`);
-      console.log(`  Model:     ${light.model.name}`);
-      console.log(`  Reachable: ${light.reachable}`);
+      console.log('  Unique Id:', light.uniqueId);
+      console.log('  Model:',     light.model.name);
+      console.log('  Reachable:', light.reachable);
     }
   });
 ```
@@ -762,7 +762,7 @@ to control all lights at once.
 client.groups.getById(0)
   .then(group => {
     console.log('Special group 0');
-    console.log('  Light Ids: ' + group.lightIds.join(', '));
+    console.log('  Light Ids:', group.lightIds.join(', '));
   });
 ```
 
@@ -810,7 +810,7 @@ client.groups.getById(6)
     return client.groups.save(group);
   })
   .then(group => {
-    console.log(` Group [${group.id}] was saved`);
+    console.log(`Group [${group.id}] was saved`);
   })
   .catch(error => {
     console.log(error.stack);
@@ -879,7 +879,7 @@ client.scenes.getAll()
   .then(scenes => {
     for (let scene of scenes) {
       console.log(`Scene [${scene.id}]: ${scene.name}`);
-      console.log('  Lights: ' + scene.lightIds.join(', '));
+      console.log('  Lights:', scene.lightIds.join(', '));
       console.log();
     }
   });
@@ -911,7 +911,7 @@ is thrown.
 client.scenes.getById('123456abcdef')
   .then(scene => {
     console.log(`Scene [${scene.id}]: ${scene.name}`);
-    console.log('  Lights: ' + scene.lightIds.join(', '));
+    console.log('  Lights:', scene.lightIds.join(', '));
     console.log();
   })
   .catch(error => {
