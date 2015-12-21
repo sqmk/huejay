@@ -516,7 +516,7 @@ The following `Light` state is available:
 * `alert` - Configurable alert effect (e.g. none, select, lselect)
 * `effect` - Configurable effect (e.g. none, colorloop)
 
-There are additional `Light` state attributes available for incrementing and
+There are additional `Light` state properties available for incrementing and
 decrementing values:
 * `incrementBrightness` - Increment or decrement brightness value
 * `incrementHue` - Increment or decrement hue value
@@ -702,7 +702,7 @@ the lights associated with the group:
 * `effect` - Configurable effect (e.g. none, colorloop)
 * `scene` - Configurable scene
 
-Like `Light` objects, `Group` state attributes are available for incrementing and
+Like `Light` objects, `Group` state properties are available for incrementing and
 decrementing values:
 * `incrementBrightness` - Increment or decrement brightness value
 * `incrementHue` - Increment or decrement hue value
