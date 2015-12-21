@@ -860,7 +860,7 @@ The Huejay API for managing schedules is not yet finalized.
 
 You can get a sneak peek of schedule management through [examples](examples/schedules).
 
-Expect finalization of the API in release v0.16.0.
+Expect finalization of the API in release v0.18.0.
 
 ### Scenes
 
@@ -1019,13 +1019,27 @@ You can get a sneak peek of sensor management through [examples](examples/sensor
 
 Expect finalization of the API in release v0.17.0.
 
+#### client.sensors.scan - Scan for new sensors
+
+#### client.sensors.getNew - Get new sensors
+
+#### client.sensors.getAll - Get all sensors
+
+#### client.sensors.getById - Get sensor by id
+
+#### client.sensors.create - Create a sensor
+
+#### client.sensors.save - Save a sensor
+
+#### client.sensors.delete - Delete a sensor
+
 ### Rules
 
 The Huejay API for managing rules is not yet finalized.
 
 You can get a sneak peek of rule management through [examples](examples/rules).
 
-Expect finalization of the API in release v0.18.0.
+Expect finalization of the API in release v0.19.0.
 
 ### Time Zones
 
