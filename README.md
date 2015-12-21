@@ -516,6 +516,14 @@ The following `Light` state is available:
 * `alert` - Configurable alert effect (e.g. none, select, lselect)
 * `effect` - Configurable effect (e.g. none, colorloop)
 
+There are additional `Light` state attributes available for incrementing and
+decrementing values:
+* `incrementBrightness` - Increment or decrement brightness value
+* `incrementHue` - Increment or decrement hue value
+* `incrementSaturation` - Increment or decrement saturation value
+* `incrementXy` - Increment or decrement xy values
+* `incrementColorTemp` - Increment or decrement color temperature value
+
 Huejay is the only Node.js client that maintains a list of Philips Hue supported
 models. The `Light` `model` attribute returns a `LightModel` object which contains
 additional details about the model:
@@ -589,6 +597,11 @@ The following `Light` object attributes and state are configurable:
 * `transitionTime`
 * `alert`
 * `effect`
+* `incrementBrightness`
+* `incrementHue`
+* `incrementSaturation`
+* `incrementXy`
+* `incrementColorTemp`
 
 *Note: See further above for details on `Light` attributes and state*
 
@@ -688,6 +701,14 @@ the lights associated with the group:
 * `alert` - Configurable alert effect (e.g. none, select, lselect)
 * `effect` - Configurable effect (e.g. none, colorloop)
 * `scene` - Configurable scene
+
+Like `Light` objects, `Group` state attributes are available for incrementing and
+decrementing values:
+* `incrementBrightness` - Increment or decrement brightness value
+* `incrementHue` - Increment or decrement hue value
+* `incrementSaturation` - Increment or decrement saturation value
+* `incrementXy` - Increment or decrement xy values
+* `incrementColorTemp` - Increment or decrement color temperature value
 
 Huejay maintains a list of Philips Hue supported luminaire models. The `Group`
 `model` attribute returns a `GroupModel` object. This object contains more
@@ -808,6 +829,11 @@ The following `Group` object attributes and state are configurable:
 * `transitionTime`
 * `alert`
 * `effect`
+* `incrementBrightness`
+* `incrementHue`
+* `incrementSaturation`
+* `incrementXy`
+* `incrementColorTemp`
 
 #### client.groups.delete - Delete a group
 
