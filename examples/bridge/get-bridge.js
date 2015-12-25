@@ -51,7 +51,7 @@ client.bridge.get()
 
     console.log(`Functions:`);
     console.log(`  Link button enabled: ${bridge.linkButtonEnabled}`);
-    console.log(`  Touch Link enabled: ${bridge.touchLinkEnabled}`);
+    console.log(`  Touchlink enabled: ${bridge.touchlinkEnabled}`);
     console.log();
   })
   .catch(error => {

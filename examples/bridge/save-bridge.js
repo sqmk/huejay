@@ -12,7 +12,7 @@ client.bridge.get()
     bridge.timeZone          = 'America/Detroit';
     bridge.zigbeeChannel     = 20;
     bridge.dhcpEnabled       = true;
-    bridge.touchLinkEnabled  = true;
+    bridge.touchlinkEnabled  = true;
     bridge.linkButtonEnabled = true;
 
     console.log(`Saving bridge configuration...`);

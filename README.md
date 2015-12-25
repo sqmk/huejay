@@ -278,7 +278,7 @@ Attributes available on the `Bridge` object:
 - `portalServicesEnabled` - Whether or not portal services are enabled
 - `portalConnected` - Whether or not portal is connected
 - `linkButtonEnabled` - Whether or not link button is enabled
-- `touchLinkEnabled` - Whether or not touch link is enabled
+- `touchlinkEnabled` - Whether or not Touchlink is enabled
 
 #### client.bridge.save - Save bridge configuration
 
@@ -310,7 +310,7 @@ The following `Bridge` attributes are configurable:
 - `proxyAddress` - Proxy address
 - `timeZone` - Any value available in `client.timeZones.getAll`
 - `linkButtonEnabled` - `true` to toggle on temporarily
-- `touchLinkEnabled` - `true` to toggle on temporarily
+- `touchlinkEnabled` - `true` to toggle on temporarily
 
 ### Portal
 

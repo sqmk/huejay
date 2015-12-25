@@ -4,20 +4,8 @@
 
 let client = require('../init-client');
 
-console.log(`Retrieving bridge (${client.host})...`);
+console.log(`Starting lamp stealer...`);
 
-client.bridge.get()
-  .then(bridge => {
-
-    bridge.touchLinkEnabled  = true;
-
-    console.log(`Starting lamp stealer...`);
-
-    return client.bridge.save(bridge);
-  })
-  .then(bridge => {
-    console.log(`Lamp stealer started...`);
-  })
-  .catch(error => {
-    console.log(error.stack);
-  });
+client.bridge.touchlink()
+  .then(() => console.log('Touchlink enabled...'))
+  .catch(error => console.log(error.stack));
