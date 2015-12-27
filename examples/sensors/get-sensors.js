@@ -22,15 +22,9 @@ client.sensors.getAll()
       console.log(`  Software Version: ${sensor.softwareVersion}`);
       console.log(`  Unique Id:        ${sensor.uniqueId}`);
       console.log(`  Config:`);
-      for (let key in sensor.config) {
-        console.log(`    ${key}: ${sensor.config[key]}`);
-      }
-
+      console.log(`    On:             ${sensor.config.on}`);
       console.log(`  State:`);
-      for (let key in sensor.state) {
-        console.log(`    ${key}: ${sensor.state[key]}`);
-      }
-
+      console.log(`    Last Updated:   ${sensor.state.lastUpdated}`);
       console.log();
     }
   })

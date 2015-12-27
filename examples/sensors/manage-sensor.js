@@ -7,15 +7,15 @@ let client = require('../init-client');
 console.log('Creating sensor...');
 
 let sensor = new client.sensors.Sensor;
-sensor.name             = 'Sensor name here';
-sensor.modelId          = 'Sensormodel';
-sensor.softwareVersion  = '1.2.3';
-sensor.type             = 'CLIPGenericFlag';
-sensor.uniqueId         = '123.456.789';
-sensor.manufacturer     = 'Huejay';
+sensor.name            = 'Sensor name here';
+sensor.modelId         = 'Sensormodel';
+sensor.softwareVersion = '1.2.3';
+sensor.type            = 'CLIPTemperature';
+sensor.uniqueId        = '123.456.789';
+sensor.manufacturer    = 'Huejay';
 
-sensor.config.on  = false;
-sensor.state.flag = true;
+sensor.config.on         = false;
+sensor.state.temperature = 10.2;
 
 client.sensors.create(sensor)
   .then(sensor => {
@@ -26,21 +26,14 @@ client.sensors.create(sensor)
     console.log(`  Software Version: ${sensor.softwareVersion}`);
     console.log(`  Unique Id: ${sensor.uniqueId}`);
     console.log(`  Config:`);
-    for (let key in sensor.config) {
-      console.log(`    ${key}: ${sensor.config[key]}`);
-    }
-
+    console.log(`    On: ${sensor.config.on}`);
     console.log(`  State:`);
-    for (let key in sensor.state) {
-      console.log(`    ${key}: ${sensor.state[key]}`);
-    }
+    console.log(`    Temperature: ${sensor.state.temperature}`);
+    console.log();
 
-    return sensor.id;
-  })
-  .then(sensorId => {
-    console.log(`Retrieving sensor ${sensorId}`);
+    console.log(`Retrieving sensor ${sensor.id}`);
 
-    return client.sensors.getById(sensorId);
+    return client.sensors.getById(sensor.id);
   })
   .then(sensor => {
     console.log('Updating sensor and changing state');
@@ -48,7 +41,7 @@ client.sensors.create(sensor)
     sensor.name = 'New sensor name here';
 
     sensor.config.on  = false;
-    sensor.state.flag = true;
+    sensor.state.temperate = 28.5;
 
     return client.sensors.save(sensor);
   })
