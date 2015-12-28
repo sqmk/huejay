@@ -1053,9 +1053,43 @@ client.sensors.scan()
 
 #### client.sensors.getNew - Get new sensors
 
+After running `client.sensors.scan`, you can use `client.sensors.getNew` to
+retrieve a list of newly registered sensors. An array of `Sensor` objects is
+returned.
+
+```js
+client.sensors.getNew()
+  .then(sensors => {
+    console.log('Found new sensors:');
+    for (let sensor of sensors) {
+      console.log(`Sensor [${sensor.id}]:`);
+      console.log('  Unique Id:', sensor.uniqueId);
+      console.log('  Model:',     sensor.model.name);
+    }
+  });
+```
+
+See below for more information on `Sensor` objects.
+
 #### client.sensors.getAll - Get all sensors
 
 #### client.sensors.getById - Get sensor by id
+
+A single sensor can be fetched by way of `client.sensors.getById`. If the sensor
+is available A `Sensor` object is returned if one matching the id is found,
+otherwise a `huejay.Error` is thrown.
+
+```js
+client.sensors.getById(1)
+  .then(sensor => {
+    console.log('Found sensor:');
+    console.log(`  Sensor [${sensor.id}]: ${sensor.name}`);
+  })
+  .catch(error => {
+    console.log('Could not find sensor');
+    console.log(error.stack);
+  });
+```
 
 #### client.sensors.create - Create a sensor
 
