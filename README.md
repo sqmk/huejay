@@ -7,24 +7,22 @@
 [![NPM Version](https://badge.fury.io/js/huejay.svg)](https://www.npmjs.com/package/huejay)
 [![Build Status](https://api.travis-ci.org/sqmk/huejay.svg?branch=master)](https://travis-ci.org/sqmk/huejay)
 
-Huejay is a client for the Philips Hue home lighting system.
+Huejay is **the best** Node.js client for the Philips Hue home lighting system.
 
 Use Huejay to interact with Philips Hue in the following ways:
-* [Bridge discovery](#bridge-discovery)
-* [Manage bridge settings](#bridge)
-* [Manage portal settings](#portal)
-* [Manage software updates](#software-update)
-* [Manage users](#users)
-* [Manage lights](#lights)
-* [Manage groups](#groups)
-* [Manage schedules](#schedules)
-* [Manage scenes](#scenes)
-* [Manage sensors](#sensors)
-* [Retrieve and delete rules](#rules)
+- [Bridge discovery](#bridge-discovery)
+- [Manage bridge settings](#bridge)
+- [Manage portal settings](#portal)
+- [Manage software updates](#software-update)
+- [Manage users](#users)
+- [Manage lights](#lights)
+- [Manage groups](#groups)
+- [Manage schedules](#schedules)
+- [Manage scenes](#scenes)
+- [Manage sensors](#sensors)
+- [Manage rules](#rules)
 
 Supported Philips Hue API version: **1.11.0**
-
-Apple HomeKit is now supported.
 
 ## Installation
 
@@ -253,6 +251,7 @@ client.bridge.get()
     console.log(`Retrieved bridge ${bridge.name}`);
     console.log('  Id:', bridge.id);
     console.log('  Model Id:', bridge.modelId);
+    console.log('  Model Name:', bridge.model.name);
   });
 ```
 
@@ -260,6 +259,7 @@ Attributes available on the `Bridge` object:
 - `id` - Unique
 - `name` - Name of the bridge
 - `modelId` - Model Id
+- `model` - A `BridgeModel` object, containing details about the model
 - `factoryNew` - Whether or not the bridge is factory new
 - `replacesBridgeId` - Replaces bridge id (for migrating from old bridges)
 - `softwareVersion` - Software version of the bridge
@@ -279,6 +279,12 @@ Attributes available on the `Bridge` object:
 - `portalConnected` - Whether or not portal is connected
 - `linkButtonEnabled` - Whether or not link button is enabled
 - `touchlinkEnabled` - Whether or not Touchlink is enabled
+
+The `Bridge` `model` attribute returns a `BridgeModel` object which contains
+additional details about the model:
+- `id` - Model Id, typically the same value as `Bridge` `modelId`
+- `manufacturer` - Manufacturer (e.g. Philips)
+- `name` - Name of the model / product (e.g. Hue v1, Hue v2)
 
 #### client.bridge.save - Save bridge configuration
 
@@ -512,45 +518,45 @@ client.lights.getAll()
 ```
 
 The following `Light` attributes are available:
-* `id` - Numerical id of the light as registered on the bridge
-* `name` - Configurable name for the light
-* `type` - Type of light (e.g. Extended Color Light, Dimmable Light)
-* `uniqueId` - Unique Id of the light
-* `manufacturer` - Name of the manufacturer
-* `modelId` - Model Id of the light, used for determining `LightModel`
-* `model` - A `LightModel` object, containing details about the model (not available in other Node.js clients!)
-* `softwareVersion` - Software version of the light
+- `id` - Numerical id of the light as registered on the bridge
+- `name` - Configurable name for the light
+- `type` - Type of light (e.g. Extended Color Light, Dimmable Light)
+- `uniqueId` - Unique Id of the light
+- `manufacturer` - Name of the manufacturer
+- `modelId` - Model Id of the light, used for determining `LightModel`
+- `model` - A `LightModel` object, containing details about the model (not available in other Node.js clients!)
+- `softwareVersion` - Software version of the light
 
 The following `Light` state is available:
-* `on` - `true` if the light is on, `false` if not, configurable
-* `reachable` - `true` if the light can be communicated with, `false` if not
-* `brightness` - Configurable brightness of the light (value from 0 to 254)
-* `colorMode` - Color mode light is respecting (e.g. ct, xy, hs)
-* `hue` - Configurable hue of the light (value from 0 to 65535)
-* `saturation` - Configurable saturation of the light, compliments `hue` (value from 0 to 254)
-* `xy` - Configurable CIE x and y coordinates (value is an array containing x and y values)
-* `colorTemp` - Configurable Mired Color temperature of the light (value from 153 to 500)
-* `transitionTime` - Configurable temporary value which eases transition of an effect (value in seconds, 0 for instant, 5 for five seconds)
-* `alert` - Configurable alert effect (e.g. none, select, lselect)
-* `effect` - Configurable effect (e.g. none, colorloop)
+- `on` - `true` if the light is on, `false` if not, configurable
+- `reachable` - `true` if the light can be communicated with, `false` if not
+- `brightness` - Configurable brightness of the light (value from 0 to 254)
+- `colorMode` - Color mode light is respecting (e.g. ct, xy, hs)
+- `hue` - Configurable hue of the light (value from 0 to 65535)
+- `saturation` - Configurable saturation of the light, compliments `hue` (value from 0 to 254)
+- `xy` - Configurable CIE x and y coordinates (value is an array containing x and y values)
+- `colorTemp` - Configurable Mired Color temperature of the light (value from 153 to 500)
+- `transitionTime` - Configurable temporary value which eases transition of an effect (value in seconds, 0 for instant, 5 for five seconds)
+- `alert` - Configurable alert effect (e.g. none, select, lselect)
+- `effect` - Configurable effect (e.g. none, colorloop)
 
 There are additional `Light` state properties available for incrementing and
 decrementing values:
-* `incrementBrightness` - Increment or decrement brightness value
-* `incrementHue` - Increment or decrement hue value
-* `incrementSaturation` - Increment or decrement saturation value
-* `incrementXy` - Increment or decrement xy values
-* `incrementColorTemp` - Increment or decrement color temperature value
+- `incrementBrightness` - Increment or decrement brightness value
+- `incrementHue` - Increment or decrement hue value
+- `incrementSaturation` - Increment or decrement saturation value
+- `incrementXy` - Increment or decrement xy values
+- `incrementColorTemp` - Increment or decrement color temperature value
 
 Huejay is the only Node.js client that maintains a list of Philips Hue supported
 models. The `Light` `model` attribute returns a `LightModel` object which contains
 additional details about the model:
-* `id` - Model Id, typically the same value as `Light` `modelId`
-* `manufacturer` - Manufacturer, typically the same value as `Light` `manufacturer`
-* `name` - Name of the model / product (e.g. Hue Spot GU10)
-* `type` - Type of light, typically the same value as `Light` `type`
-* `colorGamut` - The supported color gamut of the light
-* `friendsOfHue` - `true` if Friends of Hue, `false` if not
+- `id` - Model Id, typically the same value as `Light` `modelId`
+- `manufacturer` - Manufacturer, typically the same value as `Light` `manufacturer`
+- `name` - Name of the model / product (e.g. Hue Spot GU10)
+- `type` - Type of light, typically the same value as `Light` `type`
+- `colorGamut` - The supported color gamut of the light
+- `friendsOfHue` - `true` if Friends of Hue, `false` if not
 
 #### client.lights.getById - Get light by id
 
@@ -605,21 +611,21 @@ client.lights.getById(3)
 ```
 
 The following `Light` object attributes and state are configurable:
-* `name`
-* `on`
-* `brightness`
-* `hue`
-* `saturation`
-* `xy`
-* `colorTemp`
-* `transitionTime`
-* `alert`
-* `effect`
-* `incrementBrightness`
-* `incrementHue`
-* `incrementSaturation`
-* `incrementXy`
-* `incrementColorTemp`
+- `name`
+- `on`
+- `brightness`
+- `hue`
+- `saturation`
+- `xy`
+- `colorTemp`
+- `transitionTime`
+- `alert`
+- `effect`
+- `incrementBrightness`
+- `incrementHue`
+- `incrementSaturation`
+- `incrementXy`
+- `incrementColorTemp`
 
 *Note: See further above for details on `Light` attributes and state*
 
@@ -697,44 +703,44 @@ As demonstrated in the example above, group attributes and state are available
 via `Group` objects.
 
 Here are the following attributes available on `Group`:
-* `id` - Group Id, generated automatically by the bridge
-* `name` - Configurable name for the group
-* `type` - Configurable type of group (e.g. LightGroup, Luminaire, LightSource, Room)
-* `class` - When `type` is set to `Room`, a class (see below) is available and configurable (e.g. Living room, Office)
-* `lightIds` - An array of light ids associated with the group
-* `modelId` - Available only for multisource luminaires, this is the model id of the fixture
-* `uniqueId` - Available only for multisource luminaires, this is the unique id of the fixture
-* `model` - Available when `modelId` is present, a `GroupModel` object that contains details about the model
+- `id` - Group Id, generated automatically by the bridge
+- `name` - Configurable name for the group
+- `type` - Configurable type of group (e.g. LightGroup, Luminaire, LightSource, Room)
+- `class` - When `type` is set to `Room`, a class (see below) is available and configurable (e.g. Living room, Office)
+- `lightIds` - An array of light ids associated with the group
+- `modelId` - Available only for multisource luminaires, this is the model id of the fixture
+- `uniqueId` - Available only for multisource luminaires, this is the unique id of the fixture
+- `model` - Available when `modelId` is present, a `GroupModel` object that contains details about the model
 
 Similar to `Light` objects, `Group` objects provide state options for
 the lights associated with the group:
-* `on` - `true` for lights on, `false` if not, configurable
-* `brightness` - Configurable brightness for the lights (value from 0 to 254)
-* `colorMode` - Color mode group is respecting (e.g. ct, xy, hs)
-* `hue` - Configurable hue of the lights (value from 0 to 65535)
-* `saturation` - Configurable saturation of the lights, compliments `hue` (value from 0 to 254)
-* `xy` - Configurable CIE x and y coordinates (value is an array containing x and y values)
-* `colorTemp` - Configurable Mired Color temperature of the lights (value from 153 to 500)
-* `transitionTime` - Configurable temporary value which eases transition of an effect (value in seconds, 0 for instant, 5 for five seconds)
-* `alert` - Configurable alert effect (e.g. none, select, lselect)
-* `effect` - Configurable effect (e.g. none, colorloop)
-* `scene` - Configurable scene
+- `on` - `true` for lights on, `false` if not, configurable
+- `brightness` - Configurable brightness for the lights (value from 0 to 254)
+- `colorMode` - Color mode group is respecting (e.g. ct, xy, hs)
+- `hue` - Configurable hue of the lights (value from 0 to 65535)
+- `saturation` - Configurable saturation of the lights, compliments `hue` (value from 0 to 254)
+- `xy` - Configurable CIE x and y coordinates (value is an array containing x and y values)
+- `colorTemp` - Configurable Mired Color temperature of the lights (value from 153 to 500)
+- `transitionTime` - Configurable temporary value which eases transition of an effect (value in seconds, 0 for instant, 5 for five seconds)
+- `alert` - Configurable alert effect (e.g. none, select, lselect)
+- `effect` - Configurable effect (e.g. none, colorloop)
+- `scene` - Configurable scene
 
 Like `Light` objects, `Group` state properties are available for incrementing and
 decrementing values:
-* `incrementBrightness` - Increment or decrement brightness value
-* `incrementHue` - Increment or decrement hue value
-* `incrementSaturation` - Increment or decrement saturation value
-* `incrementXy` - Increment or decrement xy values
-* `incrementColorTemp` - Increment or decrement color temperature value
+- `incrementBrightness` - Increment or decrement brightness value
+- `incrementHue` - Increment or decrement hue value
+- `incrementSaturation` - Increment or decrement saturation value
+- `incrementXy` - Increment or decrement xy values
+- `incrementColorTemp` - Increment or decrement color temperature value
 
 Huejay maintains a list of Philips Hue supported luminaire models. The `Group`
 `model` attribute returns a `GroupModel` object. This object contains more
 information about the model:
-* `id` - Model Id, typically the same value as `Group` `modelId`
-* `manufacturer` - Manufacturer of the model (e.g. Philips)
-* `name` - Name of the model / product (e.g. Hue Beyond Table)
-* `type` - Type of group, typically the same value as `Group` `type`
+- `id` - Model Id, typically the same value as `Group` `modelId`
+- `manufacturer` - Manufacturer of the model (e.g. Philips)
+- `name` - Name of the model / product (e.g. Hue Beyond Table)
+- `type` - Type of group, typically the same value as `Group` `type`
 
 When a `Group`'s `type` is `Room`, the following classes can be associated with the group:
 
@@ -836,22 +842,22 @@ client.groups.getById(6)
 ```
 
 The following `Group` object attributes and state are configurable:
-* `name`
-* `lightIds`
-* `on`
-* `brightness`
-* `hue`
-* `saturation`
-* `xy`
-* `colorTemp`
-* `transitionTime`
-* `alert`
-* `effect`
-* `incrementBrightness`
-* `incrementHue`
-* `incrementSaturation`
-* `incrementXy`
-* `incrementColorTemp`
+- `name`
+- `lightIds`
+- `on`
+- `brightness`
+- `hue`
+- `saturation`
+- `xy`
+- `colorTemp`
+- `transitionTime`
+- `alert`
+- `effect`
+- `incrementBrightness`
+- `incrementHue`
+- `incrementSaturation`
+- `incrementXy`
+- `incrementColorTemp`
 
 #### client.groups.delete - Delete a group
 
@@ -904,21 +910,21 @@ client.scenes.getAll()
 ```
 
 `Scene` objects are composed of the following attributes:
-* `id` - User/application defined scene id (e.g. my-scene-id)
-* `name` - Configurable name
-* `lightIds` - Configurable array of associated light ids
-* `owner` - User who created the scene
-* `recycle` - Configurable option which will auto delete the scene
-* `locked` - If `true`, scene is not deletable as it is being used by another resource
-* `appData` - A configurable object consisting of `version` and `data` properties
-* `picture` - Future field, probably storing picture URL
-* `lastUpdated` - Date when scene was last updated
-* `captureLightState` - Set to `true` to capture current light state for the scene
-* `transitionTime` - Always `null` on access, but can be configured
+- `id` - User/application defined scene id (e.g. my-scene-id)
+- `name` - Configurable name
+- `lightIds` - Configurable array of associated light ids
+- `owner` - User who created the scene
+- `recycle` - Configurable option which will auto delete the scene
+- `locked` - If `true`, scene is not deletable as it is being used by another resource
+- `appData` - A configurable object consisting of `version` and `data` properties
+- `picture` - Future field, probably storing picture URL
+- `lastUpdated` - Date when scene was last updated
+- `captureLightState` - Set to `true` to capture current light state for the scene
+- `transitionTime` - Always `null` on access, but can be configured
 
 The following methods are available on `Scene` objects:
-* `getLightState(lightId)` - Get light state by light id. Values only available by `getById`.
-* `setLightState(lightId, {property: 'value'})` - Set light state by light id.
+- `getLightState(lightId)` - Get light state by light id. Values only available by `getById`.
+- `setLightState(lightId, {property: 'value'})` - Set light state by light id.
 
 #### client.scenes.getById - Retrieve scene by id
 
@@ -970,11 +976,11 @@ client.scenes.create(scene)
 ```
 
 These `Scene` object attributes can be configured for creation:
-* `name`
-* `lightIds`
-* `recycle`
-* `appData`
-* `captureLightState`
+- `name`
+- `lightIds`
+- `recycle`
+- `appData`
+- `captureLightState`
 
 #### client.scenes.save - Save a scene
 
@@ -1104,30 +1110,30 @@ client.sensors.getAll()
 ```
 
 `Sensor` objects consist of the following attributes:
-* `id` - Numerical id of the sensor as registered on the bridge
-* `name` - Configurable name for the sensor
-* `type` - Sensor type (e.g. Daylight, CLIPTemperature, ZGPSwitch)
-* `modelId` - Model Id of the sensor, used for determining `SensorModel`
-* `model` - A `SensorModel` object, containing details about the model
-* `softwareVersion` - Software version of the sensor
-* `uniqueId` - Unique Id of the sensor (typically hardware id)
-* `config` - An object with configurable attributes (dependent on sensor type)
-* `state` An object with state attributes (dependent on sensor type)
+- `id` - Numerical id of the sensor as registered on the bridge
+- `name` - Configurable name for the sensor
+- `type` - Sensor type (e.g. Daylight, CLIPTemperature, ZGPSwitch)
+- `modelId` - Model Id of the sensor, used for determining `SensorModel`
+- `model` - A `SensorModel` object, containing details about the model
+- `softwareVersion` - Software version of the sensor
+- `uniqueId` - Unique Id of the sensor (typically hardware id)
+- `config` - An object with configurable attributes (dependent on sensor type)
+- `state` An object with state attributes (dependent on sensor type)
 
 The `model` attribute on `Sensor` objects include:
-* `id` - Model Id, typically the same value as `Sensor` `modelId`
-* `manufacturer` - Manufacturer, typically the same value as `Sensor` `manufacturer`
-* `name` - Name of the model / product
-* `type` - Type of the sensor, typically the same value as `Sensor` `type`
+- `id` - Model Id, typically the same value as `Sensor` `modelId`
+- `manufacturer` - Manufacturer, typically the same value as `Sensor` `manufacturer`
+- `name` - Name of the model / product
+- `type` - Type of the sensor, typically the same value as `Sensor` `type`
 
 Support values for `Sensor` `type` includes the following:
-* CLIPGenericFlag
-* CLIPGenericStatus
-* CLIPHumidity
-* CLIPOpenClose
-* CLIPPresence
-* CLIPSwitch
-* CLIPTemperature
+- CLIPGenericFlag
+- CLIPGenericStatus
+- CLIPHumidity
+- CLIPOpenClose
+- CLIPPresence
+- CLIPSwitch
+- CLIPTemperature
 
 Configuration for `Sensor` objects is available via the `config` attribute.
 This object contains configurable attributes for the sensor, and may be different
@@ -1135,7 +1141,7 @@ for each `Sensor` `type`. See [sensor types](lib/SensorType) for available
 configuration for each sensor type.
 
 The following `config` attributes are available for all sensor types:
-* `on` - `true` to enable the sensor, `false` to not, configurable
+- `on` - `true` to enable the sensor, `false` to not, configurable
 
 State for the `Sensor` objects is accessible via the `state` attribute. Like
 configuration, the contents of the `state` object may be different for each
@@ -1144,7 +1150,7 @@ See [sensor types](lib/SensorType) for available state for all supported sensor
 types.
 
 The following `state` attributes are available for all sensor types:
-* `lastUpdated` - Time the sensor state last changed
+- `lastUpdated` - Time the sensor state last changed
 
 #### client.sensors.getById - Get sensor by id
 
