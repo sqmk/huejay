@@ -312,6 +312,24 @@ The following `Bridge` attributes are configurable:
 - `linkButtonEnabled` - `true` to toggle on temporarily
 - `touchlinkEnabled` - `true` to toggle on temporarily
 
+### client.bridge.touchlink - Enable Touchlink
+
+Having issues pairing new lights to your bridge? Reset your bridge and can't
+seem to find your existing lights? Use Huejay to enable Touchlink and steal
+those lights back. This is commonly known in the community as "Lamp stealer".
+
+Touchlink is enabled for roughly 30 seconds.
+
+```js
+client.bridge.touchlink()
+  .then(() => {
+    console.log('Touchlink is enabled');
+  });
+```
+
+You can set `touchlinkEnabled` on the `Bridge` object and save to achieve
+the same effect as this command.
+
 ### Portal
 
 The Philips Hue bridge allows connection to Philips' Meethue.com portal
@@ -1013,13 +1031,25 @@ client.scenes.delete('123456abcdef')
 
 ### Sensors
 
-The Huejay API for managing sensors is not yet finalized.
-
-You can get a sneak peek of sensor management through [examples](examples/sensors).
-
-Expect finalization of the API in release v0.17.0.
+Buy a Hue Tap or Dimmer Switch and want to configure these add-ons without the
+Philips Hue app? Want to create your own virtual sensors for customizable flags
+and values to invoke light effects? Use Huejay's set of sensor commands to do
+so.
 
 #### client.sensors.scan - Scan for new sensors
+
+This command is useful for finding new sensors/devices not yet registered with
+your bridge. Remember to enable pairing mode on the device before calling
+`client.sensors.scan`.
+
+The bridge scans for new sensors for 30 seconds before stopping.
+
+```js
+client.sensors.scan()
+  .then(() => {
+    console.log('Started new sensor scan');
+  });
+```
 
 #### client.sensors.getNew - Get new sensors
 
@@ -1032,6 +1062,20 @@ Expect finalization of the API in release v0.17.0.
 #### client.sensors.save - Save a sensor
 
 #### client.sensors.delete - Delete a sensor
+
+Delete a sensor from the bridge by passing an id or `Sensor` object to
+`client.sensors.delete`.
+
+```js
+client.sensors.delete(8)
+  .then(() => {
+    console.log('Sensor was deleted');
+  })
+  .catch(error => {
+    console.log('Sensor may have been removed already, or does not exist');
+    console.log(error.stack);
+  });
+```
 
 ### Rules
 
