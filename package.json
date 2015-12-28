@@ -1,13 +1,14 @@
 {
   "name": "huejay",
-  "version": "0.16.0",
+  "version": "0.17.0",
   "description": "Philips Hue client for Node.js",
   "keywords": [
     "hue",
     "philips",
     "huejay",
     "client",
-    "api"
+    "api",
+    "iot"
   ],
   "maintainers": [
     "Michael Squires <sqmk@php.net>"
