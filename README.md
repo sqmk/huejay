@@ -318,7 +318,20 @@ The following `Bridge` attributes are configurable:
 - `linkButtonEnabled` - `true` to toggle on temporarily
 - `touchlinkEnabled` - `true` to toggle on temporarily
 
-### client.bridge.touchlink - Enable Touchlink
+#### client.bridge.linkButton - Simulate link button press
+
+Use this command with an authenticated user to simulate pressing the Link
+button. No need to physically press the button for creating users and other
+actions.
+
+```js
+client.bridge.linkButton()
+  .then(() => {
+    console.log('Link button was pressed');
+  });
+```
+
+#### client.bridge.touchlink - Enable Touchlink
 
 Having issues pairing new lights to your bridge? Reset your bridge and can't
 seem to find your existing lights? Use Huejay to enable Touchlink and steal
