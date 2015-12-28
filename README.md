@@ -320,9 +320,9 @@ The following `Bridge` attributes are configurable:
 
 #### client.bridge.linkButton - Simulate link button press
 
-Use this command with an authenticated user to simulate pressing the Link
-button. No need to physically press the button for creating users and other
-actions.
+Use this command with an authenticated user to simulate pressing the link
+button. No need to physically press the button on your bridge for creating users
+and other actions.
 
 ```js
 client.bridge.linkButton()
