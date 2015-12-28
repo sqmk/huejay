@@ -1073,6 +1073,79 @@ See below for more information on `Sensor` objects.
 
 #### client.sensors.getAll - Get all sensors
 
+Retrieve all sensors registered to the bridge with `client.sensors.getAll`. This
+command will eventually return an array of `Sensor` objects.
+
+```js
+client.sensors.getAll()
+  .then(sensors => {
+    for (let sensor of sensors) {
+      console.log(`Sensor [${sensor.id}]: ${sensor.name}`);
+      console.log(`  Type:             ${sensor.type}`);
+      console.log(`  Manufacturer:     ${sensor.manufacturer}`);
+      console.log(`  Model Id:         ${sensor.modelId}`);
+      console.log('  Model:');
+      console.log(`    Id:             ${sensor.model.id}`);
+      console.log(`    Manufacturer:   ${sensor.model.manufacturer}`);
+      console.log(`    Name:           ${sensor.model.name}`);
+      console.log(`    Type:           ${sensor.model.type}`);
+      console.log(`  Software Version: ${sensor.softwareVersion}`);
+      console.log(`  Unique Id:        ${sensor.uniqueId}`);
+      console.log(`  Config:`);
+      console.log(`    On:             ${sensor.config.on}`);
+      console.log(`  State:`);
+      console.log(`    Last Updated:   ${sensor.state.lastUpdated}`);
+      console.log();
+    }
+  })
+  .catch(error => {
+    console.log(error.stack);
+  });
+```
+
+`Sensor` objects consist of the following attributes:
+* `id` - Numerical id of the sensor as registered on the bridge
+* `name` - Configurable name for the sensor
+* `type` - Sensor type (e.g. Daylight, CLIPTemperature, ZGPSwitch)
+* `modelId` - Model Id of the sensor, used for determining `SensorModel`
+* `model` - A `SensorModel` object, containing details about the model
+* `softwareVersion` - Software version of the sensor
+* `uniqueId` - Unique Id of the sensor (typically hardware id)
+* `config` - An object with configurable attributes (dependent on sensor type)
+* `state` An object with state attributes (dependent on sensor type)
+
+The `model` attribute on `Sensor` objects include:
+* `id` - Model Id, typically the same value as `Sensor` `modelId`
+* `manufacturer` - Manufacturer, typically the same value as `Sensor` `manufacturer`
+* `name` - Name of the model / product
+* `type` - Type of the sensor, typically the same value as `Sensor` `type`
+
+Support values for `Sensor` `type` includes the following:
+* CLIPGenericFlag
+* CLIPGenericStatus
+* CLIPHumidity
+* CLIPOpenClose
+* CLIPPresence
+* CLIPSwitch
+* CLIPTemperature
+
+Configuration for `Sensor` objects is available via the `config` attribute.
+This object contains configurable attributes for the sensor, and may be different
+for each `Sensor` `type`. See [sensor types](lib/SensorType) for available
+configuration for each sensor type.
+
+The following `config` attributes are available for all sensor types:
+* `on` - `true` to enable the sensor, `false` to not, configurable
+
+State for the `Sensor` objects is accessible via the `state` attribute. Like
+configuration, the contents of the `state` object may be different for each
+`Sensor` `type`. Rules can be configured to react to sensor state changes.
+See [sensor types](lib/SensorType) for available state for all supported sensor
+types.
+
+The following `state` attributes are available for all sensor types:
+* `lastUpdated` - Time the sensor state last changed
+
 #### client.sensors.getById - Get sensor by id
 
 A single sensor can be fetched by way of `client.sensors.getById`. If the sensor
@@ -1093,7 +1166,68 @@ client.sensors.getById(1)
 
 #### client.sensors.create - Create a sensor
 
+Want to register your own virtual sensor with the bridge? Use the
+`client.sensors.create` command to create a custom sensor.
+
+```js
+let sensor = new client.sensors.Sensor;
+
+// Set base sensor attributes
+sensor.name            = 'My temp sensor';
+sensor.modelId         = 'Custom model id';
+sensor.softwareVersion = '0.0.1';
+sensor.type            = 'CLIPTemperature';
+sensor.uniqueId        = '00:11:22';
+sensor.manufacturer    = 'Huejay';
+
+// Set sensor configuration
+sensor.config.on = true;
+
+// Set sensor state
+sensor.state.temperature = 10.2; // Temperature in Celsius
+
+// Create the sensor
+client.sensors.create(sensor)
+  .then(sensor => {
+    console.log(`New sensor [${sensor.id}] created`);
+  })
+  .catch(error => {
+    console.log('Issue creating sensor');
+    console.log(error.stack);
+  });
+```
+
+`config` and `state` attributes differ for each `Sensor` `type`. See above
+for more details.
+
 #### client.sensors.save - Save a sensor
+
+Sensor attributes, configuration, and state can be changed after registration
+with the bridge (either through `client.sensors.scan` or `client.sensors.create`).
+
+To save changes made to a `Sensor` object, pass the `Sensor` to `client.sensors.save`.
+Huejay is intelligent enough to save only changed attributes, config, and state.
+
+```js
+client.sensors.getById(8)
+  .then(sensor => {
+    sensor.name = 'My updated sensor';
+
+    // Set sensor configuration
+    sensor.config.on = false;
+
+    // Set state
+    sensor.state.temperate = 28.5; // Temperature in Celsius
+
+    return client.sensors.save(sensor);
+  })
+  .then(sensor => {
+    console.log(`Sensor [${sensor.id}] was saved`);
+  })
+  .catch(error => {
+    console.log(error.stack);
+  });
+```
 
 #### client.sensors.delete - Delete a sensor
 
