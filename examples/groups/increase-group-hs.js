@@ -12,7 +12,7 @@ client.groups.getById(0)
 
     group.incrementHue        = 6500;
     group.incrementSaturation = 25;
-    group.transitionTime      = 0;
+    group.transitionTime      = 0.3;
 
     return client.groups.save(group);
   })

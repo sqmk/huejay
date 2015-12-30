@@ -8,7 +8,7 @@ console.log('Creating group...');
 
 let group = new client.groups.Group;
 group.name     = 'Group name here';
-group.lightIds = [8, 9];
+group.lightIds = [1, 2];
 
 client.groups.create(group)
   .then(group => {
@@ -27,7 +27,7 @@ client.groups.create(group)
     console.log('Updating group and changing state');
 
     group.name           = 'New group name here';
-    group.lightIds       = [8, 9, 10, 11];
+    group.lightIds       = [3, 4, 5, 6];
     group.on             = true;
     group.brightness     = 254;
     group.transitionTime = 0;
