@@ -904,7 +904,8 @@ Expect finalization of the API in release v0.18.0.
 Huejay supports managing scenes on the Philips Hue. Scenes are the best way of
 storing and recalling commonly used light configurations in your home.
 
-*Note: To recall a scene, set the `scene` attribute on a `Group` object and save.*
+*Note: To recall a scene, set the `scene` attribute on a `Group` object and save.
+Alternatively, use the `client.scenes.recall` command.*
 
 #### client.scenes.getAll - Retrieve all scenes
 
@@ -1024,6 +1025,22 @@ client.scenes.getById('123456abcdef')
   })
   .then(scene => {
     console.log(`Scene saved...`);
+  })
+  .catch(error => {
+    console.log(error.stack);
+  });
+```
+
+
+#### client.scenes.recall - Recall a scene
+
+Recall a scene using the convenience command `client.scenes.recall`. Pass a
+`Scene` object or scene id to recall the scene.
+
+```js
+client.scenes.recall('123456abcdef')
+  .then(() => {
+    console.log('Scene was recalled');
   })
   .catch(error => {
     console.log(error.stack);
