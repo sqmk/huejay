@@ -893,11 +893,15 @@ to be thrown if attempting to do so.*
 
 ### Schedules
 
-The Huejay API for managing schedules is not yet finalized.
+#### client.schedules.getAll - Retrieve all schedules
 
-You can get a sneak peek of schedule management through [examples](examples/schedules).
+#### client.schedules.getById - Retrieve schedule by id
 
-Expect finalization of the API in release v0.18.0.
+#### client.schedules.create - Create a schedule
+
+#### client.schedules.save - Save schedule
+
+#### client.schedules.delete - Delete a schedule
 
 ### Scenes
 
