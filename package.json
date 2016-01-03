@@ -1,6 +1,6 @@
 {
   "name": "huejay",
-  "version": "0.17.2",
+  "version": "0.18.0",
   "description": "Philips Hue client for Node.js",
   "keywords": [
     "hue",
