@@ -1586,6 +1586,7 @@ Looking for more Philips Hue resources?
 - [Hue Portal](https://my.meethue.com/en-us/)
 - [Philips Hue Official Documentation](http://www.developers.meethue.com)
 - [Philips Hue Release Notes](http://www2.meethue.com/en-us/release-notes/)
+- [Reddit Hue Subreddit](https://www.reddit.com/r/hue)
 
 ## License
 
