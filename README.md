@@ -951,7 +951,29 @@ client.schedules.getById(12)
 
 Huejay is the only Hue client that takes a lot of the guesswork out of manual
 schedule creation. Other clients require you to know how the Philips Hue
-schedules API works in order to create schedules.
+schedules API works in order to create them.
+
+```js
+client.lights.getById(1)
+  .then(light => {
+    light.brightness = 1;
+
+    let schedule = new client.schedules.Schedule;
+    schedule.name        = 'Schedule name';
+    schedule.description = 'Sets light brightness to 1 on December 25, 2016 09:00pm';
+    schedule.localTime   = new client.timePatterns.AbsoluteTime('2016-12-25 21:00:00');
+    schedule.action      = new client.actions.ChangeLightState(light);
+
+    return client.schedules.create(schedule);
+  })
+  .then(schedule => {
+    console.log(`Schedule [${schedule.id}] created`);
+  })
+  .then(error => console.log(error.stack));
+```
+
+To simplify configuring `localTime` and `action` attributes on `Schedule`
+objects, use Huejay's provided time patterns and actions.
 
 ##### Time Patterns
 
