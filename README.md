@@ -1587,6 +1587,7 @@ Looking for more Philips Hue resources?
 - [Philips Hue Official Documentation](http://www.developers.meethue.com)
 - [Philips Hue Release Notes](http://www2.meethue.com/en-us/release-notes/)
 - [Reddit Hue Subreddit](https://www.reddit.com/r/hue)
+- [SqMK's Philips Hue client for PHP](https://github.com/sqmk/Phue)
 
 ## License
 
