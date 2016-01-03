@@ -17,9 +17,9 @@ client.schedules.getAll()
       console.log(`  Status: ${schedule.status}`);
       console.log(`  Auto delete: ${Boolean(schedule.autoDelete)}`);
       console.log(`  Command:`);
-      console.log(`    Method: ${schedule.command.method}`);
-      console.log(`    Address: ${schedule.command.address}`);
-      console.log(`    Body: ${JSON.stringify(schedule.command.body)}`);
+      console.log(`    Method: ${schedule.action.method}`);
+      console.log(`    Address: ${schedule.action.address}`);
+      console.log(`    Body: ${JSON.stringify(schedule.action.body)}`);
       console.log();
     }
   })

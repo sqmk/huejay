@@ -5,20 +5,22 @@
 let client = require('../init-client');
 
 // Get light
-client.lights.getById(8)
+client.lights.getById(1)
   .then(light => {
     console.log('Light found...');
 
+    light.brightness = 1;
+
     let schedule = new client.schedules.Schedule;
     schedule.name        = 'Huejay test';
-    schedule.description = 'Schedule test';
-    schedule.localTime   = new client.schedules.AbsoluteTime('2016-10-12 04:31:01');
-    schedule.status      = 'disabled';
-    schedule.autoDelete  = false;
+    schedule.description = 'Setting light brightness to 1 in 10 seconds';
+    schedule.localTime   = new client.timePatterns.Timer(10);
+    schedule.autoDelete  = true;
+    schedule.action      = new client.actions.ChangeLightState(light, ['brightness']);
 
     console.log('Creating schedule with light...');
 
-    return client.schedules.create(schedule, light, ['brightness']);
+    return client.schedules.create(schedule);
   })
   .then(schedule => {
     console.log(`Schedule created: ${schedule.id}`);
