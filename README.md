@@ -7,7 +7,7 @@
 [![NPM Version](https://badge.fury.io/js/huejay.svg)](https://www.npmjs.com/package/huejay)
 [![Build Status](https://api.travis-ci.org/sqmk/huejay.svg?branch=master)](https://travis-ci.org/sqmk/huejay)
 
-Huejay is **the best** Node.js client for the Philips Hue home lighting system.
+Huejay is the most in-depth Node.js client for the Philips Hue home lighting system.
 
 Use Huejay to interact with Philips Hue in the following ways:
 - [Discover bridges](#bridge-discovery)
@@ -22,7 +22,7 @@ Use Huejay to interact with Philips Hue in the following ways:
 - [Manage sensors](#sensors)
 - [Manage rules](#rules)
 
-Supported Philips Hue API version: **1.11.0**
+Philips Hue API version supported: **1.11.0**
 
 ## Documentation
 
