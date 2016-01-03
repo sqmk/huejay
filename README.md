@@ -1593,4 +1593,4 @@ Looking for more Philips Hue resources?
 
 This software is licensed under the MIT License. [View the license](LICENSE).
 
-Copyright © 2015 [Michael K. Squires](http://sqmk.com)
+Copyright © 2015-2016 [Michael K. Squires](http://sqmk.com)
