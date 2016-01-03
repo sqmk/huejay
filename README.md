@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://cdn.rawgit.com/sqmk/huejay/8ca17db521eab6dbcfeabf93483f2700d7aa44bb/media/logo.svg" alt="Huejay" />
+  <img src="https://cdn.rawgit.com/sqmk/huejay/db9081ee1a22acf77abc93cbd3f2e8f6d20ee16b/media/huejay.svg" alt="Huejay" />
 </p>
 
 # Huejay - Philips Hue client for Node.js
