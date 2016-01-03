@@ -1578,6 +1578,15 @@ in this repository.
 
 Huejay's initial logo was designed by scorpion6 on Fiverr. Font used is Lato Bold.
 
+## Additional Resources
+
+Looking for more Philips Hue resources?
+- [Philips Hue Product Page](http://www2.meethue.com/en-us/)
+- [Philips Hue Store](https://www.store.meethue.com/us)
+- [Hue Portal](https://my.meethue.com/en-us/)
+- [Philips Hue Official Documentation](http://www.developers.meethue.com)
+- [Philips Hue Release Notes](http://www2.meethue.com/en-us/release-notes/)
+
 ## License
 
 This software is licensed under the MIT License. [View the license](LICENSE).
