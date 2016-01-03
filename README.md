@@ -10,7 +10,7 @@
 Huejay is **the best** Node.js client for the Philips Hue home lighting system.
 
 Use Huejay to interact with Philips Hue in the following ways:
-- [Bridge discovery](#bridge-discovery)
+- [Discover bridges](#bridge-discovery)
 - [Manage bridge settings](#bridge)
 - [Manage portal settings](#portal)
 - [Manage software updates](#software-update)
@@ -23,6 +23,27 @@ Use Huejay to interact with Philips Hue in the following ways:
 - [Manage rules](#rules)
 
 Supported Philips Hue API version: **1.11.0**
+
+## Documentation
+
+- [Installation](#installation)
+- [Basic Usage](#basic-usage)
+- [Bridge Discovery](#bridge-discovery)
+- [Errors](#errors)
+- [Client Usage](#client-usage)
+  - [Users](#users)
+  - [Bridge](#bridge)
+  - [Portal](#portal)
+  - [Software Update](#software-update)
+  - [Lights](#lights)
+  - [Groups](#groups)
+  - [Schedules](#schedules)
+      - [Time Patterns](#time-patterns)
+      - [Actions](#actions)
+  - [Scenes](#scenes)
+  - [Sensors](#sensors)
+  - [Rules](#rules)
+  - [Time Zones](#time-zones)
 
 ## Installation
 
@@ -40,7 +61,7 @@ let huejay = require('huejay');
 
 Most methods return a `Promise` as a result. These are native Node.js promises.
 
-### Bridge Discovery
+## Bridge Discovery
 
 Before interacting with your Hue system, you may want to know the availability
 and IP addresses of your bridges. You can use Huejay's `discover` method to find
@@ -72,10 +93,13 @@ huejay.discover({strategy: 'upnp'})
   });
 ```
 
-### Errors
+## Errors
 
 Nearly all errors returned by Huejay are of type `huejay.Error`. Use this to
 check Huejay specific errors.
+
+Errors originating from the bridge return an additional `type` property.
+This value is the error number as returned by the Philips Hue API.
 
 ## Client Usage
 
