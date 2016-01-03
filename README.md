@@ -757,18 +757,18 @@ information about the model:
 
 When a `Group`'s `type` is `Room`, the following classes can be associated with the group:
 
-| Class        |              |
-| ------------ | ------------ |
-| Living room  | Gym          |
-| Kitchen      | Hallway      |
-| Dining       | Toilet       |
-| Bathroom     | Front door   |
-| Bedroom      | Garage       |
-| Kids bedroom | Terrace      |
-| Nursery      | Garden       |
-| Recreation   | Driveway     |
-| Office       | Other        |
-| Carport      |              |
+Class        |
+------------ | ------------
+Living room  | Gym
+Kitchen      | Hallway
+Dining       | Toilet
+Bathroom     | Front door
+Bedroom      | Garage
+Kids bedroom | Terrace
+Nursery      | Garden
+Recreation   | Driveway
+Office       | Other
+Carport      |
 
 *Note: The `client.groups.getAll` command does not return special group 0.
 See `client.groups.getById` for instructions on retrieving this special group.*
@@ -925,6 +925,7 @@ client.schedules.getAll()
 - `id` - Schedule Id, generated and assigned by the bridge on creation
 - `name` - Name for the schedule, configurable
 - `description` - Description for the schedule, configurable
+- `created` - Date when schedule was created
 - `localTime` - Configurable scheduled time, configurable, behavior differs by pattern
 - `status` - `enabled` or `disabled`, configurable
 - `autoDelete` - `true` or `false`, schedule is automatically deleted on expiration when `true`, configurable
@@ -948,7 +949,150 @@ client.schedules.getById(12)
 
 #### client.schedules.create - Create a schedule
 
+Huejay is the only Hue client that takes a lot of the guesswork out of manual
+schedule creation. Other clients require you to know how the Philips Hue
+schedules API works in order to create schedules.
+
+##### Time Patterns
+
+Huejay provides a way to easily generating Hue compatible time patterns for
+scheduling. Use these time pattern helpers for generating a compatible `localTime`
+to `Schedule` objects. Be sure to configure your preferred *time zone* of choice
+on the bridge.
+
+Here are the time patterns available in Huejay:
+
+###### Time Pattern: Absolute Time
+
+Generate a specific date. When the bridge reaches this date, the scheduled action
+is invoked.
+
+```js
+schedule.localTime = new client.timePatterns.AbsoluteTime('2016-12-30 12:00:00');
+```
+
+###### Time Pattern: Randomized Time
+
+Generate a specific date with a random element. When the bridge reaches this date,
+the scheduled action is invoked randomly between 0 and X seconds.
+
+```js
+schedule.localTime = new client.timePatterns.RandomizedTime(
+  '2016-12-30 12:00:00',
+  3600 // Seconds (3600 is one hour)
+);
+```
+
+###### Time Pattern: Recurring Time
+
+Generate a recurring weekly date. The bridge will invoke the action on each day
+configured, at the specific time set.
+
+This time pattern accepts a list of days as a combined integer. Huejay provides
+human readable equivalents which can be combined via *bitwise or*.
+
+```js
+// Run action on Mondays, Saturdays, Sundays at 09:00:00
+schedule.localTime = new client.timePatterns.RecurringTime(
+  client.timePatterns.RecurringTime.MONDAY | client.timePatterns.RecurringTime.WEEKEND,
+  '09:00:00'
+);
+
+// Available days (these values may move in the future)
+client.timePatterns.RecurringTime.MONDAY;    // Monday
+client.timePatterns.RecurringTime.TUESDAY;   // Tuesday
+client.timePatterns.RecurringTime.WEDNESDAY; // Wednesday
+client.timePatterns.RecurringTime.THURSDAY;  // Thursday
+client.timePatterns.RecurringTime.FRIDAY;    // Friday
+client.timePatterns.RecurringTime.SATURDAY;  // Saturday
+client.timePatterns.RecurringTime.SUNDAY;    // Sunday
+client.timePatterns.RecurringTime.WEEKDAY;   // Monday through Friday
+client.timePatterns.RecurringTime.WEEKEND;   // Saturday and Sunday
+```
+
+###### Time Pattern: Timer
+
+Generate a timer with the option to repeat.
+
+```js
+// Run action in 1 minute
+schedule.localTime = new client.timePatterns.Timer(60);
+
+// Run action in 30 seconds, cycling through timer 5 times
+schedule.localTime = new client.timePatterns.Timer(30, 5);
+```
+
+##### Actions
+
+Huejay assists in building actions for scheduling and rules. You can access
+these actions via `client.actions`.
+
+The following are actions available in Huejay:
+
+###### Action: Change Light State
+
+This action builds the necessary command for changing light state.
+
+```js
+// Retrieve a Light object and change state
+light.brightness     = 254;
+light.colorTemp      = 160;
+light.transitionTime = 0.5;
+
+// Instantiate action for use with Schedule or Rule objects
+// This will determine changed state for the action
+schedule.action = new client.actions.ChangeLightState(light);
+
+// Instantiate with optional argument to force retrieve state
+schedule.action = new client.actions.ChangeLightState(light, ['brightness']);
+```
+
+###### Action: Change Group State
+
+This action helps build command for changing group state.
+
+```js
+// Retrieve a Group object and change state
+group.scene = '123456abc';
+
+// Instantiate action for use with Schedule or Rule objects
+// This will determine changed state for the action
+let action = new client.actions.ChangeGroupState(group);
+
+// Instantiate with optional argument to force retrieve state
+let actionAlt = new client.actions.ChangeGroupState(group, ['scene', 'brightness']);
+```
+
 #### client.schedules.save - Save schedule
+
+Schedules can be modified and saved. Pass a `Schedule` object to
+`client.schedules.save` to update schedule attributes.
+
+```js
+client.schedules.getById(12)
+  .then(schedule => {
+    schedule.name      = 'New schedule name';
+    schedule.localTime = new client.timePatterns.Timer(3600);
+
+    return client.groups.getById(5)
+      .then(group => {
+        group.scene = '123456abcd';
+
+        schedule.action = new client.actions.ChangeGroupState(group);
+
+        return client.schedules.save(schedule);
+      });
+  })
+  .catch(error => console.log(error.stack));
+```
+
+The following attributes are modifiable:
+- name
+- description
+- localTime
+- status
+- autoDelete
+- action
 
 #### client.schedules.delete - Delete a schedule
 
