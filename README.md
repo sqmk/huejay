@@ -903,6 +903,23 @@ to be thrown if attempting to do so.*
 
 #### client.schedules.delete - Delete a schedule
 
+All it takes to delete a schedule from the bridge is to provide either a
+schedule id or a `Schedule` object to the `client.schedules.delete` command.
+
+```js
+client.schedules.delete('12')
+  .then(() => {
+    console.log('Schedule was deleted');
+  })
+  .catch(error => {
+    console.log('Schedule may have been removed already, or does not exist');
+    console.log(error.stack);
+  });
+```
+
+*Note: Schedules may be auto-deleted by the bridge. You can see which schedules
+are configured to auto-delete via `Schedule` object `autoDelete` flag.*
+
 ### Scenes
 
 Huejay supports managing scenes on the Philips Hue. Scenes are the best way of
@@ -1053,7 +1070,7 @@ client.scenes.recall('123456abcdef')
 
 #### client.scenes.delete - Delete a scene
 
-To delete a `Scene` object, provide a scene id or `Scene` object to
+To delete a scene, provide a scene id or `Scene` object to
 `client.scenes.delete`.
 
 ```js
