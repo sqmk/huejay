@@ -6,6 +6,7 @@
 
 [![NPM Version](https://badge.fury.io/js/huejay.svg)](https://www.npmjs.com/package/huejay)
 [![Build Status](https://api.travis-ci.org/sqmk/huejay.svg?branch=master)](https://travis-ci.org/sqmk/huejay)
+[![Dependency Status](https://david-dm.org/sqmk/huejay.svg)](https://david-dm.org/sqmk/huejay)
 
 Huejay is the most in-depth Node.js client for the Philips Hue home lighting system.
 
