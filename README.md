@@ -893,9 +893,58 @@ to be thrown if attempting to do so.*
 
 ### Schedules
 
+Huejay makes it extremely simple to add scheduling to your bridge. Huejay is
+the only client that abstracts the complicated bits of configuring commands and
+timers for scheduled operations.
+
 #### client.schedules.getAll - Retrieve all schedules
 
+Retrieve all registered schedules on the bridge with `client.schedules.getAll`.
+This command eventually returns a list of `Schedule` objects.
+
+```js
+client.schedules.getAll()
+  .then(schedules => {
+    for (let schedule of schedules) {
+      console.log(`Schedule [${schedule.id}]: ${schedule.name}`);
+      console.log(`  Description: ${schedule.description}`);
+      console.log(`  Created: ${schedule.created}`);
+      console.log(`  Local time: ${schedule.localTime}`);
+      console.log(`  Status: ${schedule.status}`);
+      console.log(`  Auto delete: ${Boolean(schedule.autoDelete)}`);
+      console.log(`  Action:`);
+      console.log(`    Method: ${schedule.action.method}`);
+      console.log(`    Address: ${schedule.action.address}`);
+      console.log(`    Body: ${JSON.stringify(schedule.action.body)}`);
+      console.log();
+    }
+  });
+```
+
+`Schedule` objects are composed of the following attributes:
+- `id` - Schedule Id, generated and assigned by the bridge on creation
+- `name` - Name for the schedule, configurable
+- `description` - Description for the schedule, configurable
+- `localTime` - Configurable scheduled time, configurable, behavior differs by pattern
+- `status` - `enabled` or `disabled`, configurable
+- `autoDelete` - `true` or `false`, schedule is automatically deleted on expiration when `true`, configurable
+- `action` - Hue native object representing the action to fire for the schedule, configurable
+
 #### client.schedules.getById - Retrieve schedule by id
+
+Use `client.schedules.getById` to retrieve a single schedule by id. A `Schedule`
+object is eventually returned if found.
+
+```js
+client.schedules.getById(12)
+  .then(schedule => {
+    console.log(`Found schedule [${schedule.id}]: ${schedule.name}`);
+  })
+  .catch(error => {
+    console.log('Could not find schedule');
+    console.log(error.stack);
+  });
+```
 
 #### client.schedules.create - Create a schedule
 
