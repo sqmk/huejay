@@ -1543,15 +1543,108 @@ client.sensors.delete(8)
 
 ### Rules
 
+After sensors are registered with the bridge, rules may be created to react
+to sensor state changes. For example, if the temperature changes on a sensor,
+or a button is pressed, you may want a light (or even a group of lights) to
+change color.
+
 #### client.rules.getAll - Get all rules
 
+Use `client.rules.getAll` to retrieve all rules. This will eventually return
+an array of `Rule` objects.
+
+```js
+client.rules.getAll()
+  .then(rules => {
+    for (let rule of rules) {
+      console.log(`Rule [${rule.id}]: ${rule.name}`);
+      console.log(`  Created:         ${rule.created}`);
+      console.log(`  Last Triggered:  ${rule.lastTriggered}`);
+      console.log(`  Times Triggered: ${rule.timesTriggered}`);
+      console.log(`  Owner:           ${rule.owner}`);
+      console.log(`  Status:          ${rule.status}`);
+
+      console.log(`  Conditions:`);
+      for (let condition of rule.conditions) {
+        console.log(`    Address:  ${condition.address}`);
+        console.log(`    Operator: ${condition.operator}`);
+        console.log(`    Value:    ${condition.value}`);
+        console.log();
+      }
+
+      console.log(`  Actions:`);
+      for (let action of rule.actions) {
+        console.log(`    Address: ${action.address}`);
+        console.log(`    Method:  ${action.method}`);
+        console.log(`    Body:    ${JSON.stringify(action.body)}`);
+        console.log();
+      }
+
+      console.log();
+    }
+  });
+```
+
+`Rule` objects contain the following attributes:
+- `id` - Numerical id of the rule, assigned by the bridge on creation
+- `name` - Name of the rule, configurable
+- `lastTriggered` - Date last time rule was triggered
+- `timesTriggered` - Number of times rule was triggered
+- `owner` - User who created the rule
+- `status` - `enabled` or `disabled`, rule is triggerable on `enabled`, configurable
+- `conditions` - An array of objects representing conditions, configurable
+- `actions` - An array of objects representing actions, configurable
+
+`Rule` `conditions` have the following attributes:
+- `address` - The sensor resource/state location for the condition
+- `operator` - The operator for the condition, described below
+- `value` - The value used in conjunction with `operator`
+
+`Rule` `actions` attributes:
+- `address` - The actionable resource location
+- `method` - Type of method for the action (e.g. GET, PUT)
+- `body` - The body of the action, an object
+
+There are several operators available for use with conditions:
+- `gt` - Greater than: condition is satisfied when sensor state is greater than condition's `value`
+- `lt` - Less than: condition is satisfied when sensor state is less than condition's `value`
+- `eq` - Equal to: condition is satisfied when sensor state equals the condition's `value`
+- `dx` - Changed: condition is satisfied when sensor state changes to a different value
+
+*Note: Huejay abstracts the raw operator values on creating conditions.*
+
 #### client.rules.getById - Get by id
+
+Get a single rule with `client.rules.getById`. A `Rule` object is eventually
+returned if one is found with the provided id.
+
+```js
+client.rules.getById(3)
+  .then(rule => {
+    console.log(`Found: Rule [${rule.id}] - ${rule.name}`);
+  })
+  .catch(error => console.log(error.stack));
+```
 
 #### client.rules.create - Create a rule
 
 #### client.rules.save - Save a rule
 
 #### client.rules.delete - Delete a rule
+
+To remove a rule, pass either a `Rule` object or a rule id to the
+`client.rules.delete` command.
+
+```js
+client.rules.delete(3)
+  .then(() => {
+    console.log('Rule was deleted');
+  })
+  .catch(error => {
+    console.log('Rule may have been removed already, or does not exist');
+    console.log(error.stack);
+  });
+```
 
 ### Time Zones
 
