@@ -24,7 +24,9 @@ client.sensors.getAll()
       console.log(`  Config:`);
       console.log(`    On:             ${sensor.config.on}`);
       console.log(`  State:`);
-      console.log(`    Last Updated:   ${sensor.state.lastUpdated}`);
+      for (let state in sensor.state.stateMap) {
+        console.log(`    ${state}: ${sensor.state[state]}`);
+      }
       console.log();
     }
   })
