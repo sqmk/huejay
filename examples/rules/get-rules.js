@@ -17,13 +17,22 @@ client.rules.getAll()
       console.log(`  Owner: ${rule.owner}`);
       console.log(`  Status: ${rule.status}`);
       console.log(`  Conditions:`);
+
       for (let condition of rule.conditions) {
-        console.log(`    Sensor Id: ${condition.sensorId}`);
-        console.log(`    Attribute: ${condition.attribute}`);
-        console.log(`    Operator:  ${condition.operator}`);
-        console.log(`    Value:     ${condition.value}`);
+        console.log(`    Address:  ${condition.address}`);
+        console.log(`    Operator: ${condition.operator}`);
+        console.log(`    Value:    ${condition.value}`);
         console.log();
       }
+
+      console.log(`  Actions:`);
+      for (let action of rule.actions) {
+        console.log(`    Address: ${action.address}`);
+        console.log(`    Method:  ${action.method}`);
+        console.log(`    Body:    ${JSON.stringify(action.body)}`);
+        console.log();
+      }
+
       console.log();
     }
   })

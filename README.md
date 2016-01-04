@@ -1292,7 +1292,6 @@ client.scenes.getById('123456abcdef')
   });
 ```
 
-
 #### client.scenes.recall - Recall a scene
 
 Recall a scene using the convenience command `client.scenes.recall`. Pass a
@@ -1544,11 +1543,15 @@ client.sensors.delete(8)
 
 ### Rules
 
-The Huejay API for managing rules is not yet finalized.
+#### client.rules.getAll - Get all rules
 
-You can get a sneak peek of rule management through [examples](examples/rules).
+#### client.rules.getById - Get by id
 
-Expect finalization of the API in release v0.19.0.
+#### client.rules.create - Create a rule
+
+#### client.rules.save - Save a rule
+
+#### client.rules.delete - Delete a rule
 
 ### Time Zones
 
