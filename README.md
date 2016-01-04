@@ -1546,7 +1546,7 @@ client.sensors.delete(8)
 After sensors are registered with the bridge, rules may be created to react
 to sensor state changes. For example, if the temperature changes on a sensor,
 or a button is pressed, you may want a light (or even a group of lights) to
-change color.
+change color. Rules satisfy this.
 
 #### client.rules.getAll - Get all rules
 
@@ -1628,7 +1628,110 @@ client.rules.getById(3)
 
 #### client.rules.create - Create a rule
 
+Unlike other clients, Huejay reduces the complexity of creating rules on the
+bridge. Supply a `Rule` object to `client.rules.create` to create a brand new
+rule.
+
+A rule must contain at least 1 condition and 1 action to be created. Use the
+`addCondition` method for adding conditions, and the `addAction` method to add
+actions (using the same actions available for schedules).
+
+```js
+// Retrieve sensor and group for configuring rule
+Promise.all([
+  client.sensors.getById(31),
+  client.groups.getById(0),
+])
+  .then(results => {
+    let sensor = results[0];
+    let group  = results[1];
+
+    // Configure group light state to off (this will be used for rule action)
+    group.on = false;
+
+    // Build rule
+    let rule = new client.rules.Rule;
+    rule.name   = 'My rule: All lights off on 42';
+    rule.status = 'enabled'; // Optional, defaults to 'enabled'
+
+    // Add 2 conditions to the rule (both must be satisfied to trigger rule)
+    rule.addCondition(sensor).when('buttonEvent').equals(42);
+    rule.addCondition(sensor).when('lastUpdated').changes();
+
+    // Add an action to invoke when rule is triggered
+    rule.addAction(new client.actions.ChangeGroupState(group));
+
+    return client.rules.create(rule);
+  })
+  .then(rule => {
+    console.log(`Rule [${rule.id}] created...`);
+  })
+  .catch(error => console.log(error.stack));
+```
+
+The `addCondition` helper method makes adding conditions to rules easy. This
+method returns a `Condition` object, which includes several chainable
+methods for configuring a condition. A `Sensor` object is required to use
+this helper due to the state field needing to be translated to the type's native
+field format.
+
+```js
+// Greater than (gt) operator
+rule.addCondition(sensor).when('state1').greaterThan(10);
+
+// Less than (lt) operator
+rule.addCondition(sensor).when('state2').lessThan(5);
+
+// Equals (eq) operator
+rule.addCondition(sensor).when('state3').equals(true);
+
+// Changes (dx) operator
+rule.addCondition(sensor).when('state4').changes();
+```
+
+*Note: Rules support a maximum of 8 conditions, and a maximum of 8 actions.
+A minimum of 1 condition and 1 action is required for creating and saving
+a rule.*
+
 #### client.rules.save - Save a rule
+
+Need to make a modification to an existing rule? Use the `client.rules.save`
+command to save a rule. More conditions and actions can be added to a rule
+prior to saving as well.
+
+```js
+client.rules.getById(4)
+  .then(rule => {
+    // Change rule name and disable
+    rule.name   = 'New rule name';
+    rule.status = 'disabled';
+
+    return client.rules.save(rule);
+  })
+  .catch(error => console.log(error.stack));
+```
+
+The following `Sensor` object attributes can be saved:
+- `name`
+- `status`
+- `conditions`
+- `actions`
+
+It is possible to clear existing conditions and actions on a rule for providing
+a new set of conditions and actions.
+
+```js
+client.rules.getById(4)
+  .then(rule => {
+    // Clears conditions on the rule
+    rule.clearConditions();
+
+    // Clears actions on the rule
+    rule.clearActions();
+
+    // Add conditions and actions here.
+  });
+```
 
 #### client.rules.delete - Delete a rule
 
