@@ -1711,7 +1711,7 @@ client.rules.getById(4)
   .catch(error => console.log(error.stack));
 ```
 
-The following `Sensor` object attributes can be saved:
+The following `Rule` object attributes can be saved:
 - `name`
 - `status`
 - `conditions`
