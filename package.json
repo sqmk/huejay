@@ -28,10 +28,10 @@
     "sprintf-js": "~1.0.3"
   },
   "devDependencies": {
-    "mocha":            "2.3.4",
-    "chai":             "3.4.1",
-    "chai-as-promised": "5.2.0",
-    "sinon":            "1.17.2",
-    "mockery":          "1.4.0"
+    "mocha":            "~2.4.5",
+    "chai":             "~3.5.0",
+    "chai-as-promised": "~5.2.0",
+    "sinon":            "~1.17.2",
+    "mockery":          "~1.4.0"
   }
 }
