@@ -782,7 +782,7 @@ information about the model:
 
 When a `Group`'s `type` is `Room`, the following classes can be associated with the group:
 
-Class        |
+Class        | ...
 ------------ | ------------
 Living room  | Gym
 Kitchen      | Hallway
