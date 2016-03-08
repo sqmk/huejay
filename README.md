@@ -115,12 +115,16 @@ let client = new huejay.Client({
   host:     '123.0.12.34',
   port:     80,               // Optional
   username: 'bridgeusername', // Optional
+  timeout:  15000,            // Optional, timeout in milliseconds (15000 is the default)
 });
 ```
 
 If a *username* is not provided, nearly all commands will fail due to failure to
 authenticate with the bridge. Be sure to provide a valid *username* to use all
 client commands.
+
+The *timeout* option applies to bridge commands. The default value is 15000
+milliseconds (or 15 seconds).
 
 ### Users
 
