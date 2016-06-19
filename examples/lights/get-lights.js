@@ -11,10 +11,10 @@ client.lights.getAll()
   .then(lights => {
     for (let light of lights) {
       console.log(`Light [${light.id}]: ${light.name}`);
-      console.log(`  Type:             ${light.type}`);
-      console.log(`  Unique ID:        ${light.uniqueId}`);
-      console.log(`  Manufacturer:     ${light.manufacturer}`);
-      console.log(`  Model Id:         ${light.modelId}`);
+      console.log(`  Type:         ${light.type}`);
+      console.log(`  Unique ID:    ${light.uniqueId}`);
+      console.log(`  Manufacturer: ${light.manufacturer}`);
+      console.log(`  Model Id:     ${light.modelId}`);
       console.log('  Model:');
       console.log(`    Id:             ${light.model.id}`);
       console.log(`    Manufacturer:   ${light.model.manufacturer}`);
@@ -22,7 +22,9 @@ client.lights.getAll()
       console.log(`    Type:           ${light.model.type}`);
       console.log(`    Color Gamut:    ${light.model.colorGamut}`);
       console.log(`    Friends of Hue: ${light.model.friendsOfHue}`);
-      console.log(`  Software Version: ${light.softwareVersion}`);
+      console.log(`  Product Id:         ${light.productId}`);
+      console.log(`  Software Version:   ${light.softwareVersion}`);
+      console.log(`  Software Config Id: ${light.softwareConfigId}`);
       console.log('  State:');
       console.log(`    On:         ${light.on}`);
       console.log(`    Reachable:  ${light.reachable}`);
