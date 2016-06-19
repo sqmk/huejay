@@ -1774,7 +1774,7 @@ are used to combine various resources (lights, groups, schedules, etc).
 
 *Note: Huejay's API for managing resource links is not yet finalized.*
 
-#### client.resourceLinks.getAll
+#### client.resourceLinks.getAll - Get all resource links
 
 `client.resourceLinks.getAll` can be used to retrieve all resource links from
 the bridge, which will return a list of `ResourceLink` objects via a promise.
@@ -1798,7 +1798,7 @@ client.resourceLinks.getAll()
   });
 ```
 
-#### client.resourceLinks.getById
+#### client.resourceLinks.getById - Get by id
 
 To retrieve a single resource link, use `client.resourceLinks.getById`. This command
 will eventually a return a `ResourceLink` object if found by provided resource
@@ -1812,7 +1812,7 @@ client.resourceLinks.getById(12345)
   .catch(error => console.log(error.stack));
 ```
 
-#### client.resourceLinks.create
+#### client.resourceLinks.create - Create a resource link
 
 Create resource links using the `client.resourceLinks.create` command.
 
@@ -1836,7 +1836,7 @@ client.resourceLinks.create(resourceLink)
   });
 ```
 
-#### client.resourceLinks.save
+#### client.resourceLinks.save - Save a resource link
 
 Resource links can be modified. There is a limited set of attributes that
 can be saved on these objects. Use `client.resourceLinks.save` to save an
@@ -1860,7 +1860,7 @@ The following `ResourceLink` object attributes can be saved:
 - `description`
 - `links`
 
-#### client.resourceLinks.delete
+#### client.resourceLinks.delete - Delete a resource link
 
 Resource links can be deleted using the `client.resourceLinks.delete` command.
 
