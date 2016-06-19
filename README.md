@@ -22,8 +22,9 @@ Use Huejay to interact with Philips Hue in the following ways:
 - [Manage scenes](#scenes)
 - [Manage sensors](#sensors)
 - [Manage rules](#rules)
+- [Manage resource links](#resource-links)
 
-Philips Hue API version supported: **1.11.0**
+Philips Hue API version supported: **1.13.0**
 
 ## Documentation
 
@@ -39,11 +40,12 @@ Philips Hue API version supported: **1.11.0**
   - [Lights](#lights)
   - [Groups](#groups)
   - [Schedules](#schedules)
-      - [Time Patterns](#time-patterns)
-      - [Actions](#actions)
+    - [Time Patterns](#time-patterns)
+    - [Actions](#actions)
   - [Scenes](#scenes)
   - [Sensors](#sensors)
   - [Rules](#rules)
+  - [Resource Links](#resource-links)
   - [Time Zones](#time-zones)
 
 ## Installation
@@ -1749,6 +1751,114 @@ client.rules.delete(3)
   })
   .catch(error => {
     console.log('Rule may have been removed already, or does not exist');
+    console.log(error.stack);
+  });
+```
+
+### Resource Links
+
+Want a way to group together various resources on the bridge? Resource Links
+are used to combine various resources (lights, groups, schedules, etc).
+
+*Note: Huejay's API for managing resource links is not yet finalized.*
+
+#### client.resourceLinks.getAll
+
+`client.resourceLinks.getAll` can be used to retrieve all resource links from
+the bridge, which will return a list of `ResourceLink` objects via a promise.
+
+```js
+client.resourceLinks.getAll()
+  .then(resourceLinks => {
+    for (let resourceLink of resourceLinks) {
+      console.log(`Resource Link [${resourceLink.id}]:`, resourceLink.name);
+      console.log(`  Description: ${resourceLink.description}`);
+      console.log(`  Type: ${resourceLink.type}`);
+      console.log(`  Class Id: ${resourceLink.classId}`);
+      console.log(`  Owner: ${resourceLink.owner}`);
+      console.log(`  Recycle: ${resourceLink.recycle}`);
+      console.log(`  Links: ${resourceLink.links}`);
+      console.log();
+    }
+  })
+  .catch(error => {
+    console.log(error.stack);
+  });
+```
+
+#### client.resourceLinks.getById
+
+To retrieve a single resource link, use `client.resourceLinks.getById`. This command
+will eventually a return a `ResourceLink` object if found by provided resource
+link id.
+
+```js
+client.resourceLinks.getById(12345)
+  .then(resourceLink => {
+    console.log(`Found: Resource Link [${resourceLink.id}] - ${resourceLink.name}`);
+  })
+  .catch(error => console.log(error.stack));
+```
+
+#### client.resourceLinks.create
+
+Create resource links using the `client.resourceLinks.create` command.
+
+```js
+let resourceLink = new client.resourceLinks.ResourceLink;
+
+// Set resource link attributes
+resourceLink.name        = 'Resource link name here';
+resourceLink.description = 'Resource link description here';
+resourceLink.classId     = 1;
+resourceLink.links       = ['/groups/1'];
+
+// Create the resource link
+client.resourceLinks.create(resourceLink)
+  .then(sensor => {
+    console.log(`New resource link [${resourceLink.id}] created`);
+  })
+  .catch(error => {
+    console.log('Issue creating resource link');
+    console.log(error.stack);
+  });
+```
+
+#### client.resourceLinks.save
+
+Resource links can be modified. There is a limited set of attributes that
+can be saved on these objects. Use `client.resourceLinks.save` to save an
+existing resource link.
+
+```js
+client.resourceLinks.getById(12345)
+  .then(resourceLink => {
+    // Change resource link name, description, and link set
+    resourceLink.name        = 'New resource link name';
+    resourceLink.description = 'New description';
+    resourceLink.links       = ['/groups/1', '/groups/2'];
+
+    return client.resourceLinks.save(resourceLink);
+  })
+  .catch(error => console.log(error.stack));
+```
+
+The following `ResourceLink` object attributes can be saved:
+- `name`
+- `description`
+- `links`
+
+#### client.resourceLinks.delete
+
+Resource links can be deleted using the `client.resourceLinks.delete` command.
+
+```js
+client.resourceLinks.delete(12345)
+  .then(() => {
+    console.log('Resource link was deleted');
+  })
+  .catch(error => {
+    console.log('Resource link may have been removed already, or does not exist');
     console.log(error.stack);
   });
 ```
