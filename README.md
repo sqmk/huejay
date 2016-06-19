@@ -569,7 +569,9 @@ The following `Light` attributes are available:
 - `manufacturer` - Name of the manufacturer
 - `modelId` - Model Id of the light, used for determining `LightModel`
 - `model` - A `LightModel` object, containing details about the model (not available in other Node.js clients!)
+- `productId` - Unique identifying hardware model (*Note: Not available for all lights*)
 - `softwareVersion` - Software version of the light
+- `softwareConfigId` - Software config id of the light (*Note: Not available for all lights*)
 
 The following `Light` state is available:
 - `on` - `true` if the light is on, `false` if not, configurable
@@ -1416,7 +1418,9 @@ client.sensors.getAll()
 - `type` - Sensor type (e.g. Daylight, CLIPTemperature, ZGPSwitch)
 - `modelId` - Model Id of the sensor, used for determining `SensorModel`
 - `model` - A `SensorModel` object, containing details about the model
+- `productId` - Unique identifying hardware model (*Note: Not available for all sensors*)
 - `softwareVersion` - Software version of the sensor
+- `softwareConfigId` - Software config id of the light (*Note: Not available for all sensors*)
 - `uniqueId` - Unique Id of the sensor (typically hardware id)
 - `config` - An object with configurable attributes (dependent on sensor type)
 - `state` An object with state attributes (dependent on sensor type)
@@ -1621,6 +1625,9 @@ There are several operators available for use with conditions:
 - `lt` - Less than: condition is satisfied when sensor state is less than condition's `value`
 - `eq` - Equal to: condition is satisfied when sensor state equals the condition's `value`
 - `dx` - Changed: condition is satisfied when sensor state changes to a different value
+- `ddx` - Delayed changed: condition is satisfied when sensor delayed state changes to a different value
+- `stable` - Stable: condition is satisfied when sensor state is stable for condition's `value`
+- `not stable` - Not stable: condition is satisfied when sensor state is not stable for condition's `value`
 
 *Note: Huejay abstracts the raw operator values on creating conditions.*
 
