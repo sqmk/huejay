@@ -15,6 +15,9 @@ client.groups.getAll()
       console.log(`  Class: ${group.class}`);
       console.log('  Light Ids: ' + group.lightIds.join(', '));
       console.log('  State:');
+      console.log(`    Any on:     ${group.anyOn}`);
+      console.log(`    All on:     ${group.allOn}`);
+      console.log('  Action:');
       console.log(`    On:         ${group.on}`);
       console.log(`    Brightness: ${group.brightness}`);
       console.log(`    Color mode: ${group.colorMode}`);

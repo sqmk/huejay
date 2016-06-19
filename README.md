@@ -718,6 +718,9 @@ client.groups.getAll()
       console.log(`  Class: ${group.class}`);
       console.log('  Light Ids: ' + group.lightIds.join(', '));
       console.log('  State:');
+      console.log(`    Any on:     ${group.anyOn}`);
+      console.log(`    All on:     ${group.allOn}`);
+      console.log('  Action:');
       console.log(`    On:         ${group.on}`);
       console.log(`    Brightness: ${group.brightness}`);
       console.log(`    Color mode: ${group.colorMode}`);
@@ -743,10 +746,10 @@ client.groups.getAll()
   });
 ```
 
-As demonstrated in the example above, group attributes and state are available
+As demonstrated in the example above, group attributes, state, and actions are available
 via `Group` objects.
 
-Here are the following attributes available on `Group`:
+Here are the following attributes and state available on `Group`:
 - `id` - Group Id, generated automatically by the bridge
 - `name` - Configurable name for the group
 - `type` - Configurable type of group (e.g. LightGroup, Luminaire, LightSource, Room)
@@ -755,8 +758,10 @@ Here are the following attributes available on `Group`:
 - `modelId` - Available only for multisource luminaires, this is the model id of the fixture
 - `uniqueId` - Available only for multisource luminaires, this is the unique id of the fixture
 - `model` - Available when `modelId` is present, a `GroupModel` object that contains details about the model
+- `anyOn` - True if any lights in the group are on, false if none are on
+- `allOn` - True if all lights in the group are on, false if not
 
-Similar to `Light` objects, `Group` objects provide state options for
+Similar to `Light` objects, `Group` objects provide action options for
 the lights associated with the group:
 - `on` - `true` for lights on, `false` if not, configurable
 - `brightness` - Configurable brightness for the lights (value from 0 to 254)
@@ -770,7 +775,7 @@ the lights associated with the group:
 - `effect` - Configurable effect (e.g. none, colorloop)
 - `scene` - Configurable scene
 
-Like `Light` objects, `Group` state properties are available for incrementing and
+Like `Light` objects, `Group` action properties are available for incrementing and
 decrementing values:
 - `incrementBrightness` - Increment or decrement brightness value
 - `incrementHue` - Increment or decrement hue value
@@ -853,12 +858,12 @@ client.groups.create(group)
   });
 ```
 
-*Note: State is not saved on group creation. You must save the group after
-creation if state is configured.*
+*Note: Action is not saved on group creation. You must save the group after
+creation if action is configured.*
 
-#### client.groups.save - Save a group's attributes and state
+#### client.groups.save - Save a group's attributes and action
 
-You can modify a `Group`'s attributes and state after creation/retrieval, and
+You can modify a `Group`'s attributes and action after creation/retrieval, and
 then apply the changes on the bridge. Like `Light` objects, Huejay will only
 apply deltas when saving groups.
 
@@ -885,7 +890,7 @@ client.groups.getById(6)
   });
 ```
 
-The following `Group` object attributes and state are configurable:
+The following `Group` object attributes and action are configurable:
 - `name`
 - `lightIds`
 - `on`
@@ -1100,20 +1105,20 @@ schedule.action = new client.actions.ChangeLightState(light);
 schedule.action = new client.actions.ChangeLightState(light, ['brightness']);
 ```
 
-###### Action: Change Group State
+###### Action: Change Group Action
 
-This action helps build command for changing group state.
+This action helps build command for changing group action.
 
 ```js
-// Retrieve a Group object and change state
+// Retrieve a Group object and change action
 group.scene = '123456abc';
 
 // Instantiate action for use with Schedule or Rule objects
-// This will determine changed state for the action
-let action = new client.actions.ChangeGroupState(group);
+// This will determine changed action for the action
+let action = new client.actions.ChangeGroupAction(group);
 
-// Instantiate with optional argument to force retrieve state
-let actionAlt = new client.actions.ChangeGroupState(group, ['scene', 'brightness']);
+// Instantiate with optional argument to force retrieve action
+let actionAlt = new client.actions.ChangeGroupAction(group, ['scene', 'brightness']);
 ```
 
 #### client.schedules.save - Save schedule
@@ -1131,7 +1136,7 @@ client.schedules.getById(12)
       .then(group => {
         group.scene = '123456abcd';
 
-        schedule.action = new client.actions.ChangeGroupState(group);
+        schedule.action = new client.actions.ChangeGroupAction(group);
 
         return client.schedules.save(schedule);
       });
@@ -1665,7 +1670,7 @@ Promise.all([
     rule.addCondition(sensor).when('lastUpdated').changes();
 
     // Add an action to invoke when rule is triggered
-    rule.addAction(new client.actions.ChangeGroupState(group));
+    rule.addAction(new client.actions.ChangeGroupAction(group));
 
     return client.rules.create(rule);
   })

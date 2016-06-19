@@ -24,7 +24,7 @@ Promise.all([
 
     rule.addCondition(sensor).when('buttonEvent').equals(42);
     rule.addCondition(sensor).when('lastUpdated').changes();
-    rule.addAction(new client.actions.ChangeGroupState(group));
+    rule.addAction(new client.actions.ChangeGroupAction(group));
 
     return client.rules.create(rule)
       .then(() => {
@@ -32,7 +32,7 @@ Promise.all([
 
         rule.name   = 'Fake sensor: Updated name';
         rule.status = 'disabled';
-        rule.addAction(new client.actions.ChangeGroupState(group2, ['brightness']));
+        rule.addAction(new client.actions.ChangeGroupAction(group2, ['brightness']));
 
         console.log('Updating rule...');
 

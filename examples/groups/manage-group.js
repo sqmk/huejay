@@ -24,7 +24,7 @@ client.groups.create(group)
     return client.groups.getById(groupId);
   })
   .then(group => {
-    console.log('Updating group and changing state');
+    console.log('Updating group and changing action');
 
     group.name           = 'New group name here';
     group.lightIds       = [3, 4, 5, 6];
