@@ -24,7 +24,7 @@
   },
   "dependencies": {
     "moment":     "~2.14.0",
-    "axios":      "~0.13.0",
+    "axios":      "~0.14.0",
     "sprintf-js": "~1.0.3"
   },
   "devDependencies": {
