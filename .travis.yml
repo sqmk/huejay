@@ -6,6 +6,7 @@ node_js:
     - "4.4"
     - "5.0"
     - "5.10"
+    - "6.0"
 
 script:
     - npm run test
