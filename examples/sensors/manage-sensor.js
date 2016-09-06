@@ -40,8 +40,8 @@ client.sensors.create(sensor)
 
     sensor.name = 'New sensor name here';
 
-    sensor.config.on  = false;
-    sensor.state.temperate = 28.5;
+    sensor.config.on = false;
+    sensor.state.temperature = 28.5;
 
     return client.sensors.save(sensor);
   })

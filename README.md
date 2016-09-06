@@ -24,7 +24,7 @@ Use Huejay to interact with Philips Hue in the following ways:
 - [Manage rules](#rules)
 - [Manage resource links](#resource-links)
 
-Philips Hue API version supported: **1.13.0**
+Philips Hue API version supported: **1.14.0**
 
 ## Documentation
 
@@ -1117,10 +1117,26 @@ group.scene = '123456abc';
 
 // Instantiate action for use with Schedule or Rule objects
 // This will determine changed action for the action
-let action = new client.actions.ChangeGroupAction(group);
+schedule.action = new client.actions.ChangeGroupAction(group);
 
 // Instantiate with optional argument to force retrieve action
-let actionAlt = new client.actions.ChangeGroupAction(group, ['scene', 'brightness']);
+schedule.action = new client.actions.ChangeGroupAction(group, ['scene', 'brightness']);
+```
+
+###### Action: Change Sensor State
+
+This action assists with changing sensor state.
+
+```js
+// Retrieve a Sensor object and change state
+sensor.state.status = 1;
+
+// Instantiate action for use with Schedule or Rule objects
+// This will determine changed action for the action
+schedule.action = new client.actions.ChangeSensorState(sensor);
+
+// Instantiate with optional argument to force retrieve state
+schedule.action = new client.actions.ChangeSensorState(sensor, ['status']);
 ```
 
 #### client.schedules.save - Save schedule
@@ -1528,7 +1544,7 @@ client.sensors.getById(8)
     sensor.config.on = false;
 
     // Set state
-    sensor.state.temperate = 28.5; // Temperature in Celsius
+    sensor.state.temperature = 28.5; // Temperature in Celsius
 
     return client.sensors.save(sensor);
   })
@@ -1628,6 +1644,8 @@ There are several operators available for use with conditions:
 - `ddx` - Delayed changed: condition is satisfied when sensor delayed state changes to a different value
 - `stable` - Stable: condition is satisfied when sensor state is stable for condition's `value`
 - `not stable` - Not stable: condition is satisfied when sensor state is not stable for condition's `value`
+- `in` - In: Condition is satisfied when time is within start/end time
+- `not in` - Not in: Condition is satisfied when time is not within start/end time
 
 *Note: Huejay abstracts the raw operator values on creating conditions.*
 
