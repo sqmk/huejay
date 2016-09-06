@@ -1,12 +1,10 @@
 language: node_js
 
 node_js:
-    - "4.2"
-    - "4.3"
     - "4.4"
-    - "5.0"
-    - "5.10"
+    - "4.5"
     - "6.0"
+    - "6.5"
 
 script:
     - npm run test
