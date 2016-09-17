@@ -23,7 +23,7 @@
     "test": "mocha"
   },
   "dependencies": {
-    "moment":     "~2.14.0",
+    "moment":     "~2.15.0",
     "axios":      "~0.14.0",
     "sprintf-js": "~1.0.3"
   },
