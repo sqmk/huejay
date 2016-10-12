@@ -23,8 +23,9 @@ Use Huejay to interact with Philips Hue in the following ways:
 - [Manage sensors](#sensors)
 - [Manage rules](#rules)
 - [Manage resource links](#resource-links)
+- [Retrieve capabilities](#capabilities)
 
-Philips Hue API version supported: **1.14.0**
+Philips Hue API version supported: **1.15.0**
 
 ## Documentation
 
@@ -46,6 +47,7 @@ Philips Hue API version supported: **1.14.0**
   - [Sensors](#sensors)
   - [Rules](#rules)
   - [Resource Links](#resource-links)
+  - [Capabilities](#capabilities)
   - [Time Zones](#time-zones)
 
 ## Installation
@@ -1890,6 +1892,49 @@ client.resourceLinks.delete(12345)
   .catch(error => {
     console.log('Resource link may have been removed already, or does not exist');
     console.log(error.stack);
+  });
+```
+
+### Capabilities
+
+Get bridge resource limits and timezones.
+
+#### client.capabilities.lights
+
+Retrieve bridge light limits with the command `client.capabilities.lights`.
+This command will eventually return an object describe the limits of the bridge
+around the light resource. 
+
+```js
+client.capabilities.lights()
+  .then(lights => {
+    console.log('Lights:');
+    console.log(`  Available light slots: ${lights.available}`);
+  })
+  .catch(error => {
+    console.log(error.stack);
+  });
+```
+
+You can retrieve additional information about other bridge capabilities with
+the following commands:
+- `client.capabilities.sensors`
+- `client.capabilities.groups`
+- `client.capabilities.scenes`
+- `client.capabilities.schedules`
+- `client.capabilities.rules`
+- `client.capabilities.resourceLinks`
+
+#### client.capabilities.getTimeZones
+
+Retrieve a list of supported time zones by calling `client.capabilities.getTimeZones`.
+
+```js
+client.capabilities.getAll()
+  .then(timeZones => {
+    for (let timeZone of timeZones) {
+      console.log(timeZone);
+    }
   });
 ```
 
