@@ -10,7 +10,6 @@ console.log('Make sure link button on bridge is pressed.');
 console.log('...');
 
 let user = new client.users.User;
-user.deviceType = 'customDevice';
 
 client.users.create(user)
   .then(user => {
