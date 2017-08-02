@@ -6,7 +6,7 @@ let huejay = require('../lib/Huejay');
 
 console.log('Discovering bridges...');
 
-huejay.discover({strategy: 'all'})
+huejay.discover()
   .then(bridges => {
     if (!bridges.length) {
       console.log('- No bridges found');
