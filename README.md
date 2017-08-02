@@ -24,8 +24,9 @@ Use Huejay to interact with Philips Hue in the following ways:
 - [Manage rules](#rules)
 - [Manage resource links](#resource-links)
 - [Retrieve capabilities](#capabilities)
+- [Retrieve internet services](#internet-services)
 
-Philips Hue API version supported: **1.15.0**
+Philips Hue API version supported: **1.19.0**
 
 ## Documentation
 
@@ -38,6 +39,7 @@ Philips Hue API version supported: **1.15.0**
   - [Bridge](#bridge)
   - [Portal](#portal)
   - [Software Update](#software-update)
+  - [Internet Services](#internet-services)
   - [Lights](#lights)
   - [Groups](#groups)
   - [Schedules](#schedules)
@@ -295,6 +297,8 @@ Attributes available on the `Bridge` object:
 - `model` - A `BridgeModel` object, containing details about the model
 - `factoryNew` - Whether or not the bridge is factory new
 - `replacesBridgeId` - Replaces bridge id (for migrating from old bridges)
+- `dataStoreVersion` - Data store version
+- `starterKitId` - Name of the starterkit created in the factory
 - `softwareVersion` - Software version of the bridge
 - `apiVersion` - API version of the bridge
 - `zigbeeChannel` - ZigBee channel (for communicating with lights)
@@ -477,6 +481,28 @@ client.softwareUpdate.disableInstallNotification()
   .then(() => {
     console.log('Install notification is now disabled');
   });
+```
+
+### Internet Services
+
+Interested in finding out what internet services are connected and functioning on your bridge?
+
+#### client.internetServices.get - Get internet services details
+
+Use this command for retrieving information about what internet services are connected.
+
+```js
+client.internetServices.get()
+  .then(internetServices => {
+    console.log(`Internet: ${internetServices.internetConnected}`);
+    console.log(`Remote access: ${internetServices.remoteAccessConnected}`);
+    console.log(`Time sync: ${internetServices.timeSyncConnected}`);
+    console.log(`Software update: ${internetServices.softwareUpdateConnected}`);
+  })
+  .catch(error => {
+    console.log(error.stack);
+  });
+
 ```
 
 ### Lights

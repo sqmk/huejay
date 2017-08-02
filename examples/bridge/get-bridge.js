@@ -9,11 +9,13 @@ console.log(`Retrieving bridge (${client.host})...`);
 client.bridge.get()
   .then(bridge => {
     console.log(`Bridge:`);
-    console.log(`  Id:              ${bridge.id}`);
-    console.log(`  Name:            ${bridge.name}`);
-    console.log(`  Model Id:        ${bridge.modelId}`);
-    console.log(`  Factory new:     ${bridge.factoryNew}`);
-    console.log(`  Replaces bridge: ${bridge.replacesBridgeId}`);
+    console.log(`  Id:                 ${bridge.id}`);
+    console.log(`  Name:               ${bridge.name}`);
+    console.log(`  Model Id:           ${bridge.modelId}`);
+    console.log(`  Factory new:        ${bridge.factoryNew}`);
+    console.log(`  Replaces bridge:    ${bridge.replacesBridgeId}`);
+    console.log(`  Date Store Version: ${bridge.dataStoreVersion}`);
+    console.log(`  Starter Kit Id:     ${bridge.starterKitId}`);
     console.log();
 
     console.log(`Model:`);
