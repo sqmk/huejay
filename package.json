@@ -1,6 +1,6 @@
 {
   "name": "huejay",
-  "version": "1.7.4",
+  "version": "1.8.0",
   "description": "Philips Hue client for Node.js",
   "keywords": [
     "hue",
@@ -28,10 +28,10 @@
     "sprintf-js": "~1.1.1"
   },
   "devDependencies": {
-    "mocha":            "~4.1.0",
+    "mocha":            "~5.0.0",
     "chai":             "~4.1.2",
     "chai-as-promised": "~7.1.1",
-    "sinon":            "~4.1.3",
+    "sinon":            "~4.2.2",
     "mockery":          "~2.1.0"
   }
 }
