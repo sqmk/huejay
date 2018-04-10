@@ -4,11 +4,10 @@
 
 # Huejay - Philips Hue client for Node.js
 
-[![Greenkeeper badge](https://badges.greenkeeper.io/sqmk/huejay.svg)](https://greenkeeper.io/)
-
 [![NPM Version](https://img.shields.io/npm/v/huejay.svg?style=flat-square)](https://www.npmjs.com/package/huejay)
 [![Build Status](https://img.shields.io/travis/sqmk/huejay/master.svg?style=flat-square)](https://travis-ci.org/sqmk/huejay)
 [![Dependency Status](https://img.shields.io/david/sqmk/huejay.svg?style=flat-square)](https://david-dm.org/sqmk/huejay)
+[![Greenkeeper badge](https://badges.greenkeeper.io/sqmk/huejay.svg)](https://greenkeeper.io/)
 
 Huejay is the most in-depth Node.js client for the Philips Hue home lighting system.
 
