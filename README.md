@@ -254,7 +254,7 @@ client.bridge.ping()
   .then(() => {
     console.log('Successful connection');
   })
-  catch(error => {
+  .catch(error => {
     console.log('Could not connect');
   });
 ```
@@ -270,7 +270,7 @@ client.bridge.isAuthenticated()
   .then(() => {
     console.log('Successful authentication');
   })
-  catch(error => {
+  .catch(error => {
     console.log('Could not authenticate');
   });
 ```
