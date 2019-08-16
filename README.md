@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://cdn.rawgit.com/sqmk/huejay/db9081ee1a22acf77abc93cbd3f2e8f6d20ee16b/media/huejay.svg" alt="Huejay" />
+  <img src="https://cdn.jsdelivr.net/gh/sqmk/huejay@db9081ee1a22acf77abc93cbd3f2e8f6d20ee16b/media/huejay.svg" alt="Huejay" />
 </p>
 
 # Huejay - Philips Hue client for Node.js
@@ -413,7 +413,7 @@ client.portal.get()
 ### Software Update
 
 Occasionally, Philips releases new updates for the bridge, lights, and devices.
-You can use Huejay to facilitate downloading and installation of updates.  
+You can use Huejay to facilitate downloading and installation of updates.
 
 #### client.softwareUpdate.get - Get software update details
 
@@ -1930,7 +1930,7 @@ Get bridge resource limits and timezones.
 
 Retrieve bridge light limits with the command `client.capabilities.lights`.
 This command will eventually return an object describe the limits of the bridge
-around the light resource. 
+around the light resource.
 
 ```js
 client.capabilities.lights()
