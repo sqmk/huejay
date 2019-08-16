@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://cdn.rawgit.com/sqmk/huejay/db9081ee1a22acf77abc93cbd3f2e8f6d20ee16b/media/huejay.svg" alt="Huejay" />
+  <img src="https://cdn.jsdelivr.net/gh/sqmk/huejay@db9081ee1a22acf77abc93cbd3f2e8f6d20ee16b/media/huejay.svg" alt="Huejay" />
 </p>
 
 # Huejay - Philips Hue client for Node.js
@@ -36,6 +36,7 @@ Philips Hue API version supported: **1.19.0**
 - [Bridge Discovery](#bridge-discovery)
 - [Errors](#errors)
 - [Client Usage](#client-usage)
+  - [Remote API](#using-the-remote-api)
   - [Users](#users)
   - [Bridge](#bridge)
   - [Portal](#portal)
@@ -132,6 +133,78 @@ client commands.
 
 The *timeout* option applies to bridge commands. The default value is 15000
 milliseconds (or 15 seconds).
+
+### Using the Remote API
+
+Philips provides a hosted API with an identical interface to that of the local bridge API.  Using the Remote API allows for bridges and the devices controlling them to be on seperate networks.
+
+To use it, an OAuth token must be generated first.
+
+After [adding a new Remote Hue API app](https://developers.meethue.com/my-apps/), open
+
+`https://api.meethue.com/oauth2/auth?clientid=<client-id>&appid=<app-id>&deviceid=<device-id>&devicename=<device-name>&state=<state>&response_type=code`
+
+in your browser to generate an authentication code.
+
+Parameters:
+
+| Parameter   | Meaning                                                    |
+|-------------|------------------------------------------------------------|
+| client-id   | Your app's client ID                                       |
+| app-id      | Your app ID                                                |
+| device-id   | Anything you want                                          |
+| device-name | Your app's name                                            |
+| state       | Anything you want, will be passed back in the redirect URL |
+
+Once a code has been generated, run
+
+```javascript
+const huejay = require('huejay');
+
+(async () => {
+  const token = new huejay.OAuthToken({
+    clientId: 'your-client-id',
+    clientSecret: 'your-client-secret'
+  });
+
+  await token.getByCode('your-auth-code');
+
+  console.log(JSON.stringify(token)) // => your OAuth token
+})();
+```
+
+to generate an OAuth token.
+
+You can then use the OAuth token in future requests like so:
+
+```javascript
+const huejay = require('huejay');
+
+(async () => {
+  const token = new huejay.OAuthToken({
+    clientId: 'your-client-id',
+    clientSecret: 'your-client-secret',
+    accessToken: 'your-access-token',
+    refreshToken: 'your-refresh-token'
+  });
+
+  const client = new huejay.Client({
+    remote: true,
+    oauthToken: token,
+    username: 'your-bridge-username'
+  });
+
+  // Refresh the access token
+  await token.refresh();
+
+  // Turn light `1` on
+  const light = await client.lights.getById(1);
+
+  light.on = true;
+
+  await client.lights.save(light);
+})();
+```
 
 ### Users
 
@@ -413,7 +486,7 @@ client.portal.get()
 ### Software Update
 
 Occasionally, Philips releases new updates for the bridge, lights, and devices.
-You can use Huejay to facilitate downloading and installation of updates.  
+You can use Huejay to facilitate downloading and installation of updates.
 
 #### client.softwareUpdate.get - Get software update details
 
@@ -1930,7 +2003,7 @@ Get bridge resource limits and timezones.
 
 Retrieve bridge light limits with the command `client.capabilities.lights`.
 This command will eventually return an object describe the limits of the bridge
-around the light resource. 
+around the light resource.
 
 ```js
 client.capabilities.lights()
