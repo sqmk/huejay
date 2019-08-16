@@ -23,8 +23,9 @@
     "test": "mocha"
   },
   "dependencies": {
-    "moment": "^2.24.0",
     "axios": "^0.18.0",
+    "moment": "^2.24.0",
+    "querystring": "^0.2.0",
     "sprintf-js": "^1.1.2"
   },
   "devDependencies": {
