@@ -1,5 +1,5 @@
 {
-  "name": "huejay",
+  "name": "@gv/huejay",
   "version": "1.9.0",
   "description": "Philips Hue client for Node.js",
   "keywords": [
@@ -11,10 +11,11 @@
     "iot"
   ],
   "maintainers": [
-    "Michael Squires <sqmk@php.net>"
+    "Michael Squires <sqmk@php.net>",
+    "Gonzalo Vazquez <gonzalovazquez010@gmail.com>"
   ],
   "license": "MIT",
-  "repository": "sqmk/huejay",
+  "repository": "gonzalovazquez/huejay",
   "main": "lib/Huejay.js",
   "files": [
     "lib"
@@ -23,8 +24,8 @@
     "test": "mocha"
   },
   "dependencies": {
-    "moment": "^2.24.0",
-    "axios": "^0.18.0",
+    "moment": "^2.29.1",
+    "axios": "^0.21.4",
     "sprintf-js": "^1.1.2"
   },
   "devDependencies": {
